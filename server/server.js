@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 // for ionic serve
 
 app.use(cors());
-// app.use(express.static('../www'));
+app.use(express.static('../www'));
 
 app.post('/api/player', controller.create);
 app.get('/api/player', controller.read);
