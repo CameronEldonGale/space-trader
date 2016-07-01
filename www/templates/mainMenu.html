@@ -11,12 +11,11 @@
 <script id="my-modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">My Modal title</h1>
+      <h1 class="title">Load Game</h1>
     </ion-header-bar>
     <ion-content>
-      Hello!
       <ion-item collection-repeat="player in savedGames">
-        {{player.name}} <button ng-click="loadPlayer(player)"class=" button button-positive">Load</button>
+        {{player.name}} <button ng-click="loadPlayer(player)" id="toTheRight"class="button button-positive">Load</button>
       </ion-item>
     </ion-content>
   </ion-modal-view>

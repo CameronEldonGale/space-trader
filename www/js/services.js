@@ -7,7 +7,18 @@ angular.module('app.services', [])
 .service('playerService', function($http){
 
   this.saveGame = function (obj){
-    // console.log(obj);
+
+  if (obj._id) {
+
+    if (obj._id === "need a new game") {
+      return "make a new one"
+    }
+    return $http({
+      method: "PUT",
+      url: "http://localhost:9001/api/player/" + obj._id,
+      data: obj
+    })
+  }
   return $http({
     method: 'POST',
     url: 'http://localhost:9001/api/player',
@@ -536,6 +547,7 @@ this.retire= function(player){
     }
     this.getCurrent = function(){
       return getSystem();
+
     }
 
     this.getTarget = function(i){
@@ -566,7 +578,7 @@ this.retire= function(player){
         }
         var distance = getDistance(currentSystem, planets[i]);
 
-        if (  distance > commander.ship.fuel) {
+        if (  distance > commander.ship.fuel|| distance === 0) {
           universe.splice(i,1)
         }
       }
@@ -579,12 +591,18 @@ this.retire= function(player){
       commanderService.setCommanderSystem(warpTarget);
       setUniverse()
     }
+    this.setCurrent = function (planet){
+      currentSystem = planet;
+    }
+    this.setPlanets = function(array){
+      planets = array;
+    }
 
 
 })
 
 .service('commanderService', function(tradeService){
-  var commander = {name: "commander", pilot: 8, fighter: 2, trader: 6, engineer: 2}
+  var commander = {name: "commander", pilot: 8, fighter: 2, trader: 6, engineer: 2, _id: "need a new game"}
   commander.credits = 1000
 
   commander.inventory = {

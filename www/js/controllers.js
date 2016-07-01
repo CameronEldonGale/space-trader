@@ -370,20 +370,39 @@ $scope.retire = function(){
 
 })
 
-.controller('mainMenuCtrl', function($scope, $state, $ionicModal ,commanderService, planets, playerService) {
+.controller('mainMenuCtrl', function($scope, $state, $ionicModal, $ionicPopup ,commanderService, planets, playerService) {
     $scope.saveGame = function(){
       var commander = commanderService.getCommander()
       var universe = planets.getPlanets()
       commander.planets = universe;
+      if (commander._id === "need a new game") {
+        $ionicPopup.alert({
+            title:'No game to save',
+
+            });
+        return
+      }
       playerService.saveGame(commander).then(function(res){
         // console.log(res);
+        if (res.status === 200) {
+          $ionicPopup.alert({
+              title:'Game Saved',
+
+              });
+        }
       })
     }
 
 
     $scope.loadPlayer = function(player){
+      // console.log(player.currentSystem.name);
       // console.log(player);
     commanderService.setCommander(player)
+    commander = commanderService.getCommander()
+    planets.setCurrent(commander.currentSystem)
+    planets.setPlanets(commander.planets)
+    var test = planets.getPlanets();
+    // console.log(test);
       $state.go("tabsController.system")
     }
 
