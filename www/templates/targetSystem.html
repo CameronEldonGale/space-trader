@@ -1,0 +1,21 @@
+<ion-view title="Target System" hide-back-button="true" id="page6" class=" ">
+    <ion-content padding="true" class="has-header">
+        <p id="targetSystem-markdown10" style="color:#000000;" class=" ">
+            <strong>Name</strong>     {{targetSystem.name}}   <br>
+            <strong>Size</strong>    {{targetSystem.size}}      <br>
+            <strong>Tech Level</strong>   {{targetSystem.tech}}   <br>
+            <strong>Government</strong> {{targetSystem.goverment}}     <br>
+            <strong>Distance</strong>  {{distance}}    <br>
+            <strong>Police</strong>  {{targetSystem.police}}    <br>
+            <strong>Pirates</strong>  {{targetSystem.pirates}}    <br>
+            <strong>Current Costs</strong> 0 cr
+        </p>
+        <button ng-click="back()" type="button" name="button"><</button> <button ng-click="forward()"type="button" name="button">></button>
+        <button ng-click="warp(system)"type="button" name="button">warp</button> <br>
+        water: {{price.water}}    firearms: {{price.firearms}} <br>
+        furs: {{price.furs}}      medicine: {{price.medicine}} <br>
+        food: {{price.food}}    machines: {{price.machines}} <br>
+        ore: {{price.ore}}      narcotics: {{price.narcotics}} <br>
+        games: {{price.games}}    robots: {{price.robots}} <br>
+    </ion-content>
+</ion-view>

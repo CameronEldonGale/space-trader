@@ -1,0 +1,12 @@
+<ion-view title="Shipyard" hide-back-button="true" id="page3" class=" ">
+    <ion-content padding="true" class="has-header">
+      credits: {{commander.credits}} <br> <br>
+        <p id="shipyard-markdown8" style="color:#000000;" class=" ">
+          you have fuel to fly {{commander.ship.fuel}} parsecs <br>
+        </p>
+        <p>
+          a full tank cost {{fuelCost}} credits
+        </p>
+        <button ng-click="buyFuel()" type="button" name="button">Buy Fuel</button>
+    </ion-content>
+</ion-view>

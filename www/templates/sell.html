@@ -1,0 +1,24 @@
+<!-- <ion-view title="Trade" hide-back-button="true" id="page4" class=" "> -->
+    <ion-content padding="true" class="has-header">
+        <!-- <div id="trade-button-bar1" class=" button-bar ">
+            <button ng-click="go2sell()" id="trade-button1" class=" button button-positive button-small button-block ">sell</button>
+            <button id="trade-button2" class=" button button-positive button-small button-block ">Sell</button>
+        </div> -->
+          <section>
+            <h4>Sell Cargo</h4>
+            <button ng-click="sellSome('water')"type="button" name="button">{{commander.inventory.water.amount}}</button>  ----- {{inventory.water.name}} ---- <button ng-click="sellAll('water')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.water}} <br> <br>
+            <button ng-click="sellSome('furs')"type="button" name="button">{{commander.inventory.furs.amount}}</button>  ----- {{inventory.furs.name}} ---- <button  ng-click="sellAll('furs')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.furs}} <br> <br>
+            <button ng-click="sellSome('food')"type="button" name="button">{{commander.inventory.food.amount}} </button>  ----- {{inventory.food.name}} ---- <button  ng-click="sellAll('food')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.food}} <br> <br>
+            <button ng-click="sellSome('ore')"type="button" name="button">{{commander.inventory.ore.amount}}</button>  ----- {{inventory.ore.name}} ---- <button ng-click="sellAll('ore')"  type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.ore}} <br> <br>
+            <button ng-click="sellSome('games')"type="button" name="button">{{commander.inventory.games.amount}}</button>  ----- {{inventory.games.name}} ---- <button  ng-click="sellAll('games')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.games}} <br> <br>
+            <button ng-click="sellSome('firearms')"type="button" name="button">{{commander.inventory.firearms.amount}} </button>  ----- {{inventory.firearms.name}} ---- <button  ng-click="sellAll('firearms')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.firearms}}  <br> <br>
+            <button ng-click="sellSome('medicine')"type="button" name="button">{{commander.inventory.medicine.amount}}</button>  ----- {{inventory.medicine.name}} ---- <button  ng-click="sellAll('medicine')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.medicine}} <br> <br>
+            <button ng-click="sellSome('machines')"type="button" name="button">{{commander.inventory.machines.amount}}</button>  ----- {{inventory.machines.name}} ---- <button  ng-click="sellAll('machines')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.machines}} <br> <br>
+            <button ng-click="sellSome('narcotics')"type="button" name="button">{{commander.inventory.narcotics.amount}} </button>  ----- {{inventory.narcotics.name}} ---- <button  ng-click="sellAll('narcotics')" type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.narcotics}} <br> <br>
+            <button ng-click="sellSome('robots')"type="button" name="button">{{commander.inventory.robots.amount}}</button>  ----- {{inventory.robots.name}} ---- <button ng-click="sellAll('robots')"  type="button" name="button">All</button> --- {{commander.currentSystem.sellPrice.robots}} <br> <br>
+          </section>
+          <!-- <section>
+            bays:{{commander.cargobays.filledbays}}/{{commander.cargobays.totalbays}} ------------------- cash: {{commander.credits}}
+          </section> -->
+    </ion-content>
+<!-- </ion-view> -->

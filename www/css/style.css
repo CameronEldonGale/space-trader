@@ -1,0 +1,15 @@
+/* Empty. Add your own CSS if you like */
+.startScreen {
+  height: 50vh;
+width: 100%;
+}
+
+.viewContainer{
+  margin-top: 40px;
+}
+
+
+.creator-container {
+  margin-top: 10px;
+
+}

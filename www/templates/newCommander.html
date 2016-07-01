@@ -1,0 +1,16 @@
+<ion-view title="New Commander" hide-back-button="true" id="page16" class=" ">
+    <ion-content padding="true" class="has-header">
+        <form id="newCommander-form1" class="list ">
+            <label class="item item-input " id="newCommander-input1">
+                <span class="input-label">Name</span>
+                <input ng-model="commander.name" type="text" placeholder="">
+            </label>
+        </form>
+        <p id="newCommander-markdown1" style="color:#000000;" class=" ">Skill points remaining: {{points}}</p>
+        <p id="newCommander-markdown2" style="color:#000000;" class=" ">Pilot:	&nbsp &nbsp &nbsp &nbsp<button type="button" name="button" ng-click="minus('pilot')">-</button>{{pilot}} <button type="button" name="button" ng-click="plus('pilot')">+</button></p>
+        <p id="newCommander-markdown6" style="color:#000000;" class=" ">Fighter: 	&nbsp &nbsp <button type="button" name="button" ng-click="minus('fighter')">-</button>{{fighter}} <button type="button" name="button" ng-click="plus('fighter')">+</button></p>
+        <p id="newCommander-markdown3" style="color:#000000;" class=" ">Trader: 	&nbsp &nbsp &nbsp<button type="button" name="button" ng-click="minus('trader')">-</button>{{trader}} <button type="button" name="button" ng-click="plus('trader')">+</button></p>
+        <p id="newCommander-markdown5" style="color:#000000;" class=" ">Engineer: 	&nbsp<button type="button" name="button" ng-click="minus('engineer')">-</button>{{engineer}} <button type="button" name="button" ng-click="plus('engineer')">+</button></p>
+        <button  ng-disabled="filledForm" ng-click="newCommander()"  id="newCommander-button8" class=" button button-positive  button-block ">Ok</button>
+    </ion-content>
+</ion-view>

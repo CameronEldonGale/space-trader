@@ -1,0 +1,23 @@
+<ion-view title="Main Menu" hide-back-button="true" id="page9" class=" ">
+    <ion-content padding="true" class="has-header">
+        <a ui-sref="newCommander" id="mainMenu-button3" class=" button button-positive  button-block ">New Game</a>
+        <button ng-click="loadGame()" id="mainMenu-button4" class=" button button-positive  button-block ">Load Game</button>
+        <button ng-click="saveGame()" id="mainMenu-button7" class=" button button-positive  button-block ">Save Game</button>
+        <button id="mainMenu-button5" class=" button button-positive  button-block ">High Scores</button>
+        <button id="mainMenu-button6" class=" button button-positive  button-block ">Help</button>
+    </ion-content>
+</ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+      <ion-item collection-repeat="player in savedGames">
+        {{player.name}} <button ng-click="loadPlayer(player)"class=" button button-positive">Load</button>
+      </ion-item>
+    </ion-content>
+  </ion-modal-view>
+</script>
