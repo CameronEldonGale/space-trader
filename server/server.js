@@ -10,11 +10,12 @@ var controller = require('./controllers/crudCtrl.js')
 var app = express();
 app.use(bodyParser.json());
 
-var corsOptions = {
-	origin: 'http://localhost:8100'
-};
+// var corsOptions = {
+// 	origin: 'http://localhost:8100'
+// };
+// for ionic serve
 
-app.use(cors(corsOptions));
+app.use(cors());
 // app.use(express.static('../www'));
 
 app.post('/api/player', controller.create);
