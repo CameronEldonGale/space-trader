@@ -4,3 +4,39 @@
   right: 15px;
   top: 3px;
 }
+
+#warpButton{
+  position: absolute;
+  right: 15px;
+  bottom: -213px;
+  height: 20vh;
+  width: 132px;
+}
+
+#left {
+  position: absolute;
+  right: 67px;
+  top: 15px;
+}
+
+#right {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.left-price{
+  position: absolute;
+  left: 60px;
+
+}
+
+.right-price{
+  position: absolute;
+  right: 80px;
+}
+
+.trade-container{
+  display: flex;
+  align-items: flex-start;
+}

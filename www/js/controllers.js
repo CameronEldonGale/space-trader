@@ -447,8 +447,11 @@ $scope.retire = function(){
 
 })
 
-.controller('commanderStatusCtrl', function($scope) {
-
+.controller('commanderStatusCtrl', function($scope, commanderService) {
+  $scope.commander = commanderService.getCommander();
+  $scope.showCommander = function(){
+    console.log(commanderService.getCommander());
+  }
 })
 
 .controller('personnelCtrl', function($scope) {
@@ -501,7 +504,9 @@ $scope.retire = function(){
       trader: $scope.trader,
       engineer: $scope.engineer
     }
-    //
+    var commander =commanderService.getCommander()
+    delete commander._id
+
     commanderService.setCommander(player);
   $state.go("tabsController.system")
 

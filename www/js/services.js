@@ -383,7 +383,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -393,7 +393,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -403,7 +403,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -414,7 +414,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -424,7 +424,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -434,7 +434,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -444,7 +444,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -455,7 +455,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -465,7 +465,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         },
 
@@ -476,7 +476,7 @@ this.retire= function(player){
           demand: 25,
 
 
-          defaultSupply : 10,
+          defaultSupply : getRandomIntInclusive(1, 50),
           sold: true
         }
 
@@ -510,11 +510,16 @@ this.retire= function(player){
         if (planets[i].visited === true) {
           planets[i].days = planets[i].days + 1;
         }
-        if (planets[i].days > 10) {
+        if (planets[i].days > 0) {
           for (var item in planets[i].inventory) {
             if (planets[i].inventory.hasOwnProperty(item)) {
-              if (planets[i].inventory[item].supply === 0) {
-                planets[i].inventory[item].supply = planets[i].inventory[item].defaultSupply + getRandomIntInclusive(-10, 35)
+              if (planets[i].inventory[item].supply < planets[i].inventory[item].defaultSupply) {
+                planets[i].inventory[item].supply +=  Math.floor(planets[i].inventory[item].defaultSupply * (getRandomIntInclusive(5,20)/100) )
+                console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
+              }
+              if (planets[i].inventory[item].supply > planets[i].inventory[item].defaultSupply) {
+                planets[i].inventory[item].supply -=  Math.floor(planets[i].inventory[item].defaultSupply * (getRandomIntInclusive(5,20)/100) )
+                console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
               }
             }
           }
@@ -659,11 +664,11 @@ this.retire= function(player){
 
   }
   commander.ship = {
-    name: "flea",
-    range: 5,
-    fuel: 5,
+    name: "Gnat",
+    range: 14,
+    fuel: 14,
     cargobays: {
-      total: 10,
+      total: 15,
       filled: 0
     }
   }

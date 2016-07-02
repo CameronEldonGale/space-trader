@@ -9,13 +9,13 @@ var controller = require('./controllers/crudCtrl.js')
 
 var app = express();
 app.use(bodyParser.json());
-
+// NOTE: comment out corsOptions and app.use(corsOptions) before pushing to git
 // var corsOptions = {
 // 	origin: 'http://localhost:8100'
 // };
 // for ionic serve
-
-app.use(cors());
+// app.use(cors(corsOptions))
+app.use(cors());//---when pushing fix this
 app.use(express.static('../www'));
 
 app.post('/api/player', controller.create);
@@ -30,7 +30,7 @@ app.get('/api/highscores', controller.readHighscore);
 
 
 
-var port = 9001;
+var port = 80;
 app.listen(port, function(){
 console.log("wubba lubba dub dub");});
 

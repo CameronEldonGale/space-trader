@@ -10,12 +10,29 @@
             <strong>Pirates</strong>  {{targetSystem.pirates}}    <br>
             <strong>Current Costs</strong> 0 cr
         </p>
-        <button ng-click="back()" type="button" name="button"><</button> <button ng-click="forward()"type="button" name="button">></button>
-        <button ng-click="warp(system)"type="button" name="button">warp</button> <br>
-        water: {{price.water}}    firearms: {{price.firearms}} <br>
+        <button id="left"ng-click="back()" type="button" name="button"><</button> <button id="right"ng-click="forward()"type="button" name="button">></button>
+
+        <section class="price-container">
+          <section class="left-price">
+            water: {{price.water}} <br>
+            furs: {{price.furs}} <br>
+            food: {{price.food}}<br>
+            ore: {{price.ore}}<br>
+            games: {{price.games}}<br>
+          </section>
+          <section class="right-price">
+            firearms: {{price.firearms}}<br>
+            medicine: {{price.medicine}}<br>
+            machines: {{price.machines}}<br>
+            narcotics: {{price.narcotics}}<br>
+            robots: {{price.robots}}<br>
+          </section>
+        </section>
+        <button id="warpButton"ng-click="warp(system)"type="button" name="button">warp</button> <br>
+        <!-- water: {{price.water}}    firearms: {{price.firearms}} <br>
         furs: {{price.furs}}      medicine: {{price.medicine}} <br>
         food: {{price.food}}    machines: {{price.machines}} <br>
         ore: {{price.ore}}      narcotics: {{price.narcotics}} <br>
-        games: {{price.games}}    robots: {{price.robots}} <br>
+        games: {{price.games}}    robots: {{price.robots}} <br> -->
     </ion-content>
 </ion-view>
