@@ -5,9 +5,8 @@ angular.module('app.services', [])
 }])
 
 .service('playerService', function($http){
-  var host = "http://localhost:9001";
-  // var host = "104.131.137.160"
-  // var host = "spacetrader.ninja"
+  // var host = "http://localhost:9001";
+  var host = "http://localhost:80";
 
   this.saveGame = function (obj){
 
