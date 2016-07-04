@@ -469,6 +469,11 @@ $scope.retire = function(){
 .controller('optionsCtrl', function($scope) {
 
 })
+.controller('loginCtrl', function($scope,$state) {
+$scope.submit = function(){
+ $state.go("mainMenu")
+}
+})
 
 .controller('spaceTraderCtrl', function($scope) {
 
