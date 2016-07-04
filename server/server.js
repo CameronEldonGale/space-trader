@@ -33,7 +33,7 @@ app.get('/api/highscores', controller.readHighscore);
 
 var port = 80;
 // var port = 9001;
-server.listen(port);
+// server.listen(port);
 // app.listen(port, function(){
 // console.log("wubba lubba dub dub");});
 
