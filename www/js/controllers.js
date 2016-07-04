@@ -22,7 +22,7 @@ $scope.retire = function(){
     $scope.data = {}
       var myPopup = $ionicPopup.show({
           title: 'Buy Fuel',
-          template:" How much do you want to spend on fuel?"+ '<input ng-model="data.buyAmount" type="Number" min=0 max='+ maxFuel +'>',
+          template:" How much do you want to spend on fuel?"+ '<input ng-model="data.buyAmount" value ="0" type="Number" min=0 max='+ maxFuel +'>',
           scope: $scope,
           buttons: [
                       { text: 'Back' },

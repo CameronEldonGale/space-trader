@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // var corsOptions = {
 // 	origin: 'http://localhost:8100'
 // };
-// for ionic serve
+//
 // app.use(cors(corsOptions))
 app.use(cors());//---when pushing fix this
 app.use(express.static('../www'));
@@ -36,14 +36,3 @@ app.listen(port, function(){
 console.log("wubba lubba dub dub");});
 
 mongoose.connect('mongodb://localhost/spacetrader');
-
-// mongoose.connect('mongodb://spacetrader.ninja/spacetrader');
-
-
-// var appConnection = mongoose.createConnection('mongodb://104.131.137.160/api');
-//
-// appConnection.on('error', console.error.bind(console, 'connection error:'));
-// appConnection.once('open', function callback () {
-//   console.log("h");
-//
-// });
