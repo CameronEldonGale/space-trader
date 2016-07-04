@@ -44,3 +44,16 @@
 button {
   background: #f4f4f4;
 }
+
+.trade-button-container{
+  margin-top: 25px;
+}
+
+.trade-buysell{
+width: 49%;
+float: left;
+}
+
+.trade-text-container{
+  clear: both;
+}
