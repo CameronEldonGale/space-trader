@@ -73,4 +73,19 @@ float: left;
 
 .login-container{
   text-align: center;
+  background: #387ef5;
+  border-radius: 5px;
+  margin: 22px;
+}
+
+.login-inputfields{
+  margin: 5px;
+  width: 90%;
+  background: aliceblue;
+  border-radius: 5px;
+}
+
+.login-button{
+  border-radius: 5px;
+  border: transparent;
 }
