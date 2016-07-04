@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 var planet = require("./Planet")
+// var user = require("./User")
 
 var Schema = mongoose.Schema;
 
 var playerSchema = new Schema({
+  // user: { type: Schema.ObjectId, ref: "User" },
   name: String,
   pilot: Number,
   fighter: Number,
