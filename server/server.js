@@ -5,14 +5,14 @@ var mongoose = require ('mongoose');
 var controller = require('./controllers/crudCtrl.js')
 
 var app = express();
-
-var http = require("http").Server(app);
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+var io = require('socket.io')(server)
 
 io.on('connection', function(){
  console.log("listening on 80");
 });
 server.listen(80);
+
 
 
 app.use(bodyParser.json());
@@ -28,7 +28,6 @@ app.delete('/api/player/:id', controller.delete);
 
 app.post('/api/highscores', controller.createHighscore);
 app.get('/api/highscores', controller.readHighscore);
-
 
 
 
