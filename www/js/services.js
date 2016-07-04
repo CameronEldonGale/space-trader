@@ -6,7 +6,7 @@ angular.module('app.services', [])
 
 .service('playerService', function($http){
   // var host = "http://localhost:9001";
-  var host = "http://localhost:80";
+  // var host = "http://localhost:80";
 
   this.saveGame = function (obj){
 
@@ -17,13 +17,13 @@ angular.module('app.services', [])
     }
     return $http({
       method: "PUT",
-      url: host+"/api/player/" + obj._id,
+      url: "/api/player/" + obj._id,
       data: obj
     })
   }
   return $http({
     method: 'POST',
-    url: host+'/api/player',
+    url: '/api/player',
     data: obj
   })
 }
@@ -38,7 +38,7 @@ this.loadGame= function(){
 this.retire= function(player){
   return $http({
     method: 'POST',
-    url: host+'/api/highscores',
+    url: '/api/highscores',
     data: player
   })
 }
