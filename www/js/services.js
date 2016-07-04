@@ -5,8 +5,9 @@ angular.module('app.services', [])
 }])
 
 .service('playerService', function($http){
-  // var host = "localhost:9001";
-  var host = "104.131.137.160"
+  var host = "http://localhost:9001";
+  // var host = "104.131.137.160"
+  // var host = "spacetrader.ninja"
 
   this.saveGame = function (obj){
 
@@ -17,13 +18,13 @@ angular.module('app.services', [])
     }
     return $http({
       method: "PUT",
-      url: "http://"+host+"/api/player/" + obj._id,
+      url: host+"/api/player/" + obj._id,
       data: obj
     })
   }
   return $http({
     method: 'POST',
-    url: 'http://'+host+'/api/player',
+    url: host+'/api/player',
     data: obj
   })
 }
@@ -31,14 +32,14 @@ this.loadGame= function(){
 
   return $http({
     method: 'GET',
-    url: 'http://'+host+'/api/player'
+    url: host+'/api/player'
   })
 
 }
 this.retire= function(player){
   return $http({
     method: 'POST',
-    url: 'http://'+host+'/api/highscores',
+    url: host+'/api/highscores',
     data: player
   })
 }
