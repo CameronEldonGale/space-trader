@@ -6,7 +6,7 @@ var controller = require('./controllers/crudCtrl.js')
 
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io')(server)
+var io = require('socket.io').listen(app.listen(80))
 
 io.on('connection', function(){
  console.log("listening on 80");
