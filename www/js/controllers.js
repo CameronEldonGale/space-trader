@@ -54,12 +54,10 @@ $scope.retire = function(){
           if (res === 'max') {
             res = maxFuel
           }
-          // if (res === "cancel") {
-          //   return
-          // }
-          // if (res === NaN) {
-          //   return
-          // }
+          if (res === "cancel") {
+            return
+          }
+    
           if (res) {
 
             var boughtFuel = commanderService.buyFuel(res)
