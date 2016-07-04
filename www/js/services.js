@@ -780,6 +780,9 @@ this.retire= function(player){
   }
 
   this.buyFuel = function(fuelAmount){
+    if (!!fuelAmount) {
+      return "cancel"
+    }
     if (fuelAmount > commander.credits) {
       return "You can't afford it"
     }

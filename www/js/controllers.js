@@ -50,7 +50,7 @@ $scope.retire = function(){
         })
 
         myPopup.then(function(res) {
-          // console.log(res);
+          console.log(res);
           if (res === 'max') {
             res = maxFuel
           }
