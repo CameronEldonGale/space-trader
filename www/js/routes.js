@@ -27,7 +27,7 @@ angular.module('app.routes', [])
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
 
-  }
+  
 })
 
   .state('tabsController.shipyard', {
