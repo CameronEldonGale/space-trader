@@ -31,14 +31,14 @@ this.loadGame= function(){
 
   return $http({
     method: 'GET',
-    url: '/api/player'
+    url: host +'/api/player'
   })
 
 }
 this.retire= function(player){
   return $http({
     method: 'POST',
-    url: '/api/highscores',
+    url:'/api/highscores',
     data: player
   })
 }

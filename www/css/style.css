@@ -40,3 +40,7 @@
   display: flex;
   align-items: flex-start;
 }
+
+button {
+  background: #f4f4f4;
+}
