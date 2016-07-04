@@ -470,7 +470,8 @@ $scope.retire = function(){
 
 })
 .controller('loginCtrl', function($scope,$state) {
-$scope.submit = function(){
+$scope.submit = function(user){
+  console.log(user);
  $state.go("mainMenu")
 }
 })

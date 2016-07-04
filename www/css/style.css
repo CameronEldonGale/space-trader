@@ -70,3 +70,7 @@ float: left;
 .trade-text-container{
   clear: both;
 }
+
+.login-container{
+  text-align: center;
+}

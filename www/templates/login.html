@@ -1,9 +1,10 @@
 <ion-view title="Space Trader" hide-nav-bar="true" hide-back-button="true" class=" ">
     <ion-content padding="false" class=" manual-remove-top-padding" scroll="false">
-        <div class="">
-          login!
-
-          <button ng-click="submit()"type="button" name="button">submit</button>
+        <div class="login-container">
+          <h4>Login</h4>
+          <input ng-model="user.username" type="text" name="user" placeholder="Username" />
+          <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
+          <button ng-click="submit(user)"type="button" name="button">submit</button>
 
         </div>
     </ion-content>
