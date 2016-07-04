@@ -469,15 +469,28 @@ $scope.retire = function(){
 .controller('optionsCtrl', function($scope) {
 
 })
-.controller('loginCtrl', function($scope,$state) {
+.controller('loginCtrl', function($scope,$state,playerService) {
+
+
       $scope.submit = function(user){
         console.log(user);
-       $state.go("mainMenu")
+        var socket = io.connect('http://localhost');
+          socket.on('connect', function(){
+              socket.emit('authentication', {username: "John", password: "secret"});
+              socket.on('authenticated', function() {
+              // use the socket as usual
+               $state.go("mainMenu")
+              });
+            });
+
       }
 
       $scope.signUp = function(user){
-        console.log(user);
-       $state.go("mainMenu")
+
+        playerService.createUser(user).then(function(res){
+          console.log(res);
+          $state.go("login",{},{reload:true})
+        })
       }
 })
 

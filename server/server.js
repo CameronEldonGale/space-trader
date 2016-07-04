@@ -6,13 +6,14 @@ var controller = require('./controllers/crudCtrl.js')
 
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(app.listen(80))
+// var io = require('socket.io').listen(app.listen(80))
+var io = require('socket.io')(server);
 
 io.on('connection', function(){
  console.log("listening on 80");
 });
 
-
+server.listen(3000);
 
 
 app.use(bodyParser.json());
@@ -25,16 +26,12 @@ app.get('/api/player', controller.read);
 app.put('/api/player/:id', controller.update);
 app.delete('/api/player/:id', controller.delete);
 
+app.post('/api/user', controller.createUser);
+
+
 
 app.post('/api/highscores', controller.createHighscore);
 app.get('/api/highscores', controller.readHighscore);
 
-
-
-var port = 80;
-// var port = 9001;
-// server.listen(port);
-// app.listen(port, function(){
-// console.log("wubba lubba dub dub");});
 
 mongoose.connect('mongodb://localhost/spacetrader');

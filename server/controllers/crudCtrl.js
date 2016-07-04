@@ -50,6 +50,15 @@ module.exports = {
             else res.send(result);
           });
       },
+      createUser: function(req, res) {
+          var newUser = new User(req.body);
+          newUser.save(function(err, result) {
+
+            if (err){   console.log(err)
+              return res.status(500).send(err);}
+            else{ res.send(result);}
+          });
+        },
 
 
 }
