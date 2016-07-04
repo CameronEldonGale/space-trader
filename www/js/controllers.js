@@ -54,6 +54,12 @@ $scope.retire = function(){
           if (res === 'max') {
             res = maxFuel
           }
+          if (res === "cancel") {
+            return
+          }
+          if (res === NaN) {
+            return
+          }
           var boughtFuel = commanderService.buyFuel(res)
           if (boughtFuel !== 'ok') {
             $ionicPopup.alert({
