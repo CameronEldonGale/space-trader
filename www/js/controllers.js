@@ -54,21 +54,25 @@ $scope.retire = function(){
           if (res === 'max') {
             res = maxFuel
           }
-          if (res === "cancel") {
-            return
-          }
-          if (res === NaN) {
-            return
-          }
-          var boughtFuel = commanderService.buyFuel(res)
-          if (boughtFuel !== 'ok') {
-            $ionicPopup.alert({
-                title: boughtFuel,
+          // if (res === "cancel") {
+          //   return
+          // }
+          // if (res === NaN) {
+          //   return
+          // }
+          if (res) {
 
-                });
+            var boughtFuel = commanderService.buyFuel(res)
+            if (boughtFuel !== 'ok') {
+              $ionicPopup.alert({
+                  title: boughtFuel,
+
+                  });
+              $scope.fuelCost = commander.ship.range - commander.ship.fuel
+            }
           }
-          // console.log(boughtFuel);
-          $scope.fuelCost = commander.ship.range - commander.ship.fuel
+          return
+
         });
 
 
