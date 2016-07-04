@@ -79,6 +79,13 @@ float: left;
   margin: 22px;
   height: 25vh;
 }
+.login-container h4 {
+  color: white;
+}
+
+#signUp{
+  height: 30vh;
+}
 
 .login-inputfields{
   margin: 5px;
