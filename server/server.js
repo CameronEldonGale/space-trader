@@ -13,7 +13,7 @@ io.on('connection', function(){
  console.log("listening on 80");
 });
 
-server.listen(3000);
+server.listen(80);
 
 
 app.use(bodyParser.json());
