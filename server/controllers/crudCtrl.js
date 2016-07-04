@@ -1,5 +1,6 @@
 var Player = require("../models/Player")
 var HighScore = require("../models/Highscore")
+var User = require("../models/User")
 
 module.exports = {
     create: function(req, res) {
