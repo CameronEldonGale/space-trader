@@ -4,10 +4,13 @@ var cors = require("cors");
 var mongoose = require ('mongoose');
 var controller = require('./controllers/crudCtrl.js')
 
-
-
-
 var app = express();
+
+var http = require("http").Server(app);
+var io = require('socket.io')(http);
+
+
+
 app.use(bodyParser.json());
 
 app.use(cors());
