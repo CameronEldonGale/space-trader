@@ -4,6 +4,9 @@
   right: 15px;
   top: 3px;
 }
+.mainMenu-img{
+  margin: 115px;
+}
 
 #warpButton{
   position: absolute;
