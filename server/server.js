@@ -11,7 +11,7 @@ var io = require('socket.io')(server)
 io.on('connection', function(){
  console.log("listening on 80");
 });
-server.listen(80);
+
 
 
 
@@ -33,7 +33,8 @@ app.get('/api/highscores', controller.readHighscore);
 
 var port = 80;
 // var port = 9001;
-app.listen(port, function(){
-console.log("wubba lubba dub dub");});
+server.listen(port);
+// app.listen(port, function(){
+// console.log("wubba lubba dub dub");});
 
 mongoose.connect('mongodb://localhost/spacetrader');
