@@ -470,10 +470,15 @@ $scope.retire = function(){
 
 })
 .controller('loginCtrl', function($scope,$state) {
-$scope.submit = function(user){
-  console.log(user);
- $state.go("mainMenu")
-}
+      $scope.submit = function(user){
+        console.log(user);
+       $state.go("mainMenu")
+      }
+
+      $scope.signUp = function(user){
+        console.log(user);
+       $state.go("mainMenu")
+      }
 })
 
 .controller('spaceTraderCtrl', function($scope) {
