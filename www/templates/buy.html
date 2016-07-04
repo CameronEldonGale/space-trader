@@ -18,7 +18,7 @@
               <button ng-click="buySome('narcotics')" type="button" name="button">{{inventory.narcotics.supply}}</button>
               <button ng-click="buySome('robots')" type="button" name="button">{{inventory.robots.supply}}</button>
             </section>
-            <section>
+            <section class="trade-names-container">
               {{inventory.water.name}}
               {{inventory.water.name}}
               {{inventory.water.name}}
@@ -31,21 +31,31 @@
               {{inventory.water.name}}
 
             </section>
-            <section>
-              <button ng-click="buyMax('water')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.water}}
-              <button ng-click="buyMax('furs')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.furs}}
-              <button ng-click="buyMax('food')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.food}}
-              <button  ng-click="buyMax('ore')" type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.ore}}
-              <button ng-click="buyMax('games')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.games}}
-              <button ng-click="buyMax('firearms')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.firearms}}
-              <button ng-click="buyMax('medicine')"  type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.medicine}}
-              <button  ng-click="buyMax('machines')" type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.machines}}
-              <button  ng-click="buyMax('narcotics')" type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.narcotics}}
-              <button  ng-click="buyMax('robots')" type="button" name="button">Max</button>  {{commander.currentSystem.buyPrice.robots}}
+            <section class="trade-max-container">
+              <button ng-click="buyMax('water')"  type="button" name="button">Max</button>
+              <button ng-click="buyMax('furs')"  type="button" name="button">Max</button>
+              <button ng-click="buyMax('food')"  type="button" name="button">Max</button>
+              <button  ng-click="buyMax('ore')" type="button" name="button">Max</button>
+              <button ng-click="buyMax('games')"  type="button" name="button">Max</button>
+              <button ng-click="buyMax('firearms')"  type="button" name="button">Max</button>
+              <button ng-click="buyMax('medicine')"  type="button" name="button">Max</button>
+              <button  ng-click="buyMax('machines')" type="button" name="button">Max</button>
+              <button  ng-click="buyMax('narcotics')" type="button" name="button">Max</button>
+              <button  ng-click="buyMax('robots')" type="button" name="button">Max</button>
+            </section>
+            <section class="tade-price-container">
+              {{commander.currentSystem.buyPrice.water}}
+              {{commander.currentSystem.buyPrice.furs}}
+              {{commander.currentSystem.buyPrice.food}}
+              {{commander.currentSystem.buyPrice.ore}}
+              {{commander.currentSystem.buyPrice.games}}
+              {{commander.currentSystem.buyPrice.firearms}}
+              {{commander.currentSystem.buyPrice.medicine}}
+              {{commander.currentSystem.buyPrice.machines}}
+              {{commander.currentSystem.buyPrice.narcotics}}
+              {{commander.currentSystem.buyPrice.robots}}
             </section>
 
           </section>
-          <!-- <section>
-            bays:{{commander.cargobays.filledbays}}/{{commander.cargobays.totalbays}}  cash: {{commander.credits}}
-          </section> -->
+
     </ion-content>

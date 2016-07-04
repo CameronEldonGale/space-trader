@@ -498,7 +498,8 @@ this.retire= function(player){
       new Planet("McDonald"),
       new Planet("Caprica"),
       new Planet("Romulus"),
-      new Planet("Kronos")
+      new Planet("Kronos"),
+      new Planet("Utopia"),
     ]
 
     function updatePlanets (){
@@ -780,7 +781,7 @@ this.retire= function(player){
   }
 
   this.buyFuel = function(fuelAmount){
-  
+
     if (fuelAmount > commander.credits) {
       return "You can't afford it"
     }
