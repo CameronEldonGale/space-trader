@@ -31,7 +31,7 @@ this.loadGame= function(){
 
   return $http({
     method: 'GET',
-    url: host+'/api/player'
+    url: '/api/player'
   })
 
 }
