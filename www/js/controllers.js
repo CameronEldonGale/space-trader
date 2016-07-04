@@ -50,14 +50,14 @@ $scope.retire = function(){
         })
 
         myPopup.then(function(res) {
-          console.log(res);
+          // console.log(res);
           if (res === 'max') {
             res = maxFuel
           }
           if (res === "cancel") {
             return
           }
-    
+
           if (res) {
 
             var boughtFuel = commanderService.buyFuel(res)
