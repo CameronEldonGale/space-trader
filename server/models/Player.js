@@ -5,7 +5,8 @@ var planet = require("./Planet")
 var Schema = mongoose.Schema;
 
 var playerSchema = new Schema({
-  // user: { type: Schema.ObjectId, ref: "User" },
+  user: { type: Schema.ObjectId, ref: "User" },
+  special: Schema.Types.Mixed,
   name: String,
   pilot: Number,
   fighter: Number,

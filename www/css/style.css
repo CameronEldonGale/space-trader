@@ -1,4 +1,12 @@
 /* Empty. Add your own CSS if you like */
+/*#green {
+  background: #4caf50;
+}*/
+.backButton-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #newCommander{
   position: absolute;
     top: 113px;
@@ -7,6 +15,7 @@
     width: 32%;
 }
 #toTheRight {
+  background: #4caf50;
   position: absolute;
   right: 15px;
   top: 3px;

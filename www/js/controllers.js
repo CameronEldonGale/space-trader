@@ -50,7 +50,7 @@ $scope.retire = function(){
         })
 
         myPopup.then(function(res) {
-          // console.log(res);
+          //
           if (res === 'max') {
             res = maxFuel
           }
@@ -357,6 +357,9 @@ $scope.retire = function(){
 })
 
 .controller('systemCtrl', function($scope, $stateParams, planets) {
+      $scope.specialValue = false;
+
+
     $scope.currentSystem = planets.getCurrent()
     var universe = planets.getPlanets()
     for (var i = 0; i < universe.length; i++) {
@@ -383,6 +386,7 @@ $scope.retire = function(){
       var commander = commanderService.getCommander()
       var universe = planets.getPlanets()
       commander.planets = universe;
+      commander.user = localStorage.id
       if (commander._id === "need a new game") {
         $ionicPopup.alert({
             title:'No game to save',
@@ -391,7 +395,7 @@ $scope.retire = function(){
         return
       }
       playerService.saveGame(commander).then(function(res){
-        // console.log(res);
+        //
         if (res.status === 200) {
           $ionicPopup.alert({
               title:'Game Saved',
@@ -403,14 +407,14 @@ $scope.retire = function(){
 
 
     $scope.loadPlayer = function(player){
-      // console.log(player.currentSystem.name);
-      // console.log(player);
+      //
+      //
     commanderService.setCommander(player)
     commander = commanderService.getCommander()
     planets.setCurrent(commander.currentSystem)
     planets.setPlanets(commander.planets)
     var test = planets.getPlanets();
-    // console.log(test);
+    //
       $state.go("tabsController.system")
     }
 
@@ -422,8 +426,9 @@ $scope.retire = function(){
     });
     $scope.loadGame = function() {
       $scope.modal.show();
-      playerService.loadGame().then(function(res){
-      //  console.log(res);
+      var id = localStorage.id
+      playerService.loadGame(id).then(function(res){
+      //
       $scope.savedGames = res.data
 
      })
@@ -443,6 +448,12 @@ $scope.retire = function(){
     $scope.$on('modal.removed', function() {
       // Execute action
     });
+
+    $scope.logout = function(){
+      $state.go("login")
+      localStorage.setItem("id","")
+      localStorage.setItem("token","")
+    }
 
 
 })
@@ -469,23 +480,74 @@ $scope.retire = function(){
 .controller('optionsCtrl', function($scope) {
 
 })
-.controller('loginCtrl', function($scope,$state,playerService) {
+
+.controller('socketCtrl', function($scope) {
+  var token = localStorage.token
+  var socket;
+  $scope.$on("logged in",function (ev, data){
+    console.log("connection");
+    socket = io.connect('http://localhost:9001', {
+    'query': 'token=' + token
+  });
+  })
+
+
+
+
+
+})
+
+.controller('loginCtrl', function($scope,$state,$ionicPopup,playerService) {
+
 
 
       $scope.submit = function(user){
+
         playerService.loginUser(user).then(function(res){
-          console.log(res);
+          console.log(res.data);
+          var token = res.data.token
+          localStorage.setItem("id", res.data.id)
+          localStorage.setItem("token", token);
+          // console.log(localStorage);
+          if (token) {
+            $state.go("mainMenu")
+            $scope.$emit("logged in", token)
+          }else {
+            $state.go("login")
+            $ionicPopup.alert({
+                title: "Unable to login",
+                template: "password and username do not match"
+
+                });
+          }
+
         })
 
       }
 
       $scope.signUp = function(user){
+        console.log(user);
+
+        if (user === undefined||user.name === undefined||user.password === undefined||user.email === undefined) {
+          $state.go("login",{},{reload:true})
+          $ionicPopup.alert({
+              title: "Unable to sign up",
+              template: "all feilds are required"
+
+              });
+              return
+        }
 
         playerService.createUser(user).then(function(res){
-          console.log(res);
-          $state.go("login",{},{reload:true})
+
+          localStorage.setItem("id", res.data._id)
+          console.log(localStorage.id);
+          $state.go("mainMenu",{},{reload:true})
         })
       }
+
+
+
 })
 
 .controller('spaceTraderCtrl', function($scope) {

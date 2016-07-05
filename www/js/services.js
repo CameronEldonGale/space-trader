@@ -27,11 +27,11 @@ angular.module('app.services', [])
     data: obj
   })
 }
-this.loadGame= function(){
+this.loadGame= function(id){
 
   return $http({
     method: 'GET',
-    url:host+'/api/player'
+    url:host+'/api/player/'+id
   })
 
 }
@@ -52,6 +52,7 @@ this.createUser = function(user){
 }
 
 this.loginUser = function(user){
+  // console.log(user);
   return $http({
     method: 'POST',
     url:host+ '/login',
@@ -379,6 +380,10 @@ this.loginUser = function(user){
 
     var Planet = function(name) {
       this.name= name;
+      this.special = false
+      if (name === "Utopia") {
+        this.special = "moon"
+      }
       this.resource = "Nothing special"
       this.visited = false;
       this.days = 0;

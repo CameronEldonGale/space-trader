@@ -14,11 +14,12 @@ module.exports = {
       },
 
       read: function(req, res) {
-          Player.find(req.query)
-          .exec(function(err, result) {
-            if (err) return res.status(500).send(err);
-            else res.send(result);
-          });
+        console.log(req.params.id);
+          Player.find({user: req.params.id})
+            .exec(function(err, result) {
+                  if (err) return res.status(500).send(err);
+                  else res.send(result);
+                });
       },
 
   update: function(req, res) {
@@ -60,7 +61,14 @@ module.exports = {
             else{ res.send(result);}
           });
         },
-        
+
+        readUser: function(req, res) {
+            User.find(req.query)
+            .exec(function(err, result) {
+              if (err) return res.status(500).send(err);
+              else res.send(result);
+            });
+        },
 
 
 }

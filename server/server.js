@@ -4,52 +4,90 @@ var cors = require("cors");
 var mongoose = require ('mongoose');
 var controller = require('./controllers/crudCtrl.js')
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
 var jwt = require('jsonwebtoken');
 var app = express();
 var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var socketioJwt = require('socketio-jwt');
 var jwtSecret = require('./secret')
-var sio = io.listen(server)
+// var sio = io.listen(server)
+var options = {
+  origin: 'http://localhost:8100'
+}
 
-sio.set('authorization', socketioJwt.authorize({
+app.use(cors(options));
+app.use(bodyParser())
+
+io.use(socketioJwt.authorize({
   secret: jwtSecret,
   handshake: true
 }));
 
-sio.sockets
-  .on('connection', function (socket) {
-     console.log(socket.handshake.decoded_token.username, 'connected');
-     //socket.on('event');
-  });
+io.on('connection', function (socket) {
+  // in socket.io 1.0
+  console.log('hello! ', socket.decoded_token.name);
+})
+
+// io.sockets
+//   .on('connection', socketioJwt.authorize({
+//     secret: jwtSecret,
+//     timeout: 15000 // 15 seconds to send the authentication message
+//   })).on('authenticated', function(socket) {
+//     //this socket is authenticated, we are good to handle more events from it.
+//     console.log('hello! ' + socket.decoded_token.name);
+//   });
+// sio.set('authorization', socketioJwt.authorize({
+//   secret: jwtSecret,
+//   handshake: true
+// }));
+//
+// sio.sockets
+//   .on('connection', function (socket) {
+//      console.log(socket.handshake.decoded_token.username, 'connected');
+//      //socket.on('event');
+//   });
 
   server.listen(9001, function () {
     console.log('listening on http://localhost:9001');
   });
 
+
 app.post('/login', function (req, res) {
-   console.log(req.query);
-  // // TODO: validate the actual user user
-  var profile = {
-    username: "bob",
-    password: "bob"
-  };
-  // var profile = req
 
-  // we are sending the profile in the token
-  var token = jwt.sign(profile, jwtSecret, { expiresInMinutes: 60*5 });
 
-  res.json({token: token});
+ var User = require("./models/User");
+
+ User.findOne({name: req.body.username})
+ .lean()
+  .exec()
+  .then(function(user){
+    if (user.password !== req.body.password) {
+      return res.send("combination not found")
+    }
+      var token = jwt.sign(user, jwtSecret, { expiresIn: "2 days" });
+      // console.log(user);
+      var returnObj = {
+        token: token,
+        id: user._id
+      }
+      res.json(returnObj);
+  }).catch(function(err){
+    res.json(err)
+  })
+
 });
 
 
 app.use(bodyParser.json());
 
-app.use(cors(options));
+
 app.use(express.static('../www'));
 
 app.post('/api/player', controller.create);
-app.get('/api/player', controller.read);
+// app.get('/api/player', controller.read);//get rid off yeah?
+
+app.get('/api/player/:id', controller.read)
+
 app.put('/api/player/:id', controller.update);
 app.delete('/api/player/:id', controller.delete);
 
