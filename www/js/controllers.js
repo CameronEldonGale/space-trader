@@ -504,11 +504,11 @@ $scope.retire = function(){
       $scope.submit = function(user){
 
         playerService.loginUser(user).then(function(res){
-          console.log(res.data);
+
           var token = res.data.token
           localStorage.setItem("id", res.data.id)
           localStorage.setItem("token", token);
-          // console.log(localStorage);
+          //
           if (token) {
             $state.go("mainMenu")
             $scope.$emit("logged in", token)
@@ -526,7 +526,7 @@ $scope.retire = function(){
       }
 
       $scope.signUp = function(user){
-        console.log(user);
+
 
         if (user === undefined||user.name === undefined||user.password === undefined||user.email === undefined) {
           $state.go("login",{},{reload:true})
@@ -541,7 +541,7 @@ $scope.retire = function(){
         playerService.createUser(user).then(function(res){
 
           localStorage.setItem("id", res.data._id)
-          console.log(localStorage.id);
+
           $state.go("mainMenu",{},{reload:true})
         })
       }
