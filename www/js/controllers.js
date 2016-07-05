@@ -486,7 +486,7 @@ $scope.retire = function(){
   var socket;
   $scope.$on("logged in",function (ev, data){
     console.log("connection");
-    socket = io.connect('http://localhost:9001', {
+    socket = io.connect('http://spacetrader.ninja', {
     'query': 'token=' + token
   });
   })
