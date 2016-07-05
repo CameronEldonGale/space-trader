@@ -51,6 +51,14 @@ this.createUser = function(user){
   })
 }
 
+this.loginUser = function(user){
+  return $http({
+    method: 'POST',
+    url:host+ '/login',
+    data: user
+  })
+}
+
 
 
 })
