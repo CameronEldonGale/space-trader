@@ -5,55 +5,174 @@
             <button ng-click="go2buy()"id="trade-button2" class=" button button-positive button-smMax button-block ">buy</button>
         </div> -->
         <h4>Buy Cargo</h4>
+        <section class="trade-container ">
+          <section class="item-container trade-header">
+            <section class="inventory column">
+              <h6>Tons</h6>
+            </section>
+            <section class="item-name-container column">
+              <h6>Good</h6>
+            </section>
+            <section class="max-container column">
+              <h6>Buy</h6>
+            </section>
+            <section class="item-price-container column">
+              <h6>Price</h6>
+            </section>
+          </section>
           <section class="trade-container">
-            <section class="inv-buttions-container">
-              <button ng-click="buySome('water')" type="button" name="button">{{inventory.water.supply}}</button>
-              <button ng-click="buySome('furs')" type="button" name="button">{{inventory.furs.supply}}</button>
-              <button ng-click="buySome('food')" type="button" name="button">{{inventory.food.supply}}</button>
-              <button ng-click="buySome('ore')" type="button" name="button">{{inventory.ore.supply}}</button>
-              <button ng-click="buySome('games')" type="button" name="button">{{inventory.games.supply}} </button>
-              <button ng-click="buySome('firearms')" type="button" name="button">{{inventory.firearms.supply}}</button>
-              <button ng-click="buySome('medicine')" type="button" name="button">{{inventory.medicine.supply}}</button>
-              <button ng-click="buySome('machines')" type="button" name="button">{{inventory.machines.supply}} </button>
-              <button ng-click="buySome('narcotics')" type="button" name="button">{{inventory.narcotics.supply}}</button>
-              <button ng-click="buySome('robots')" type="button" name="button">{{inventory.robots.supply}}</button>
-            </section>
-            <section class="trade-names-container">
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
-              {{inventory.water.name}}
 
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('water')" type="button" name="button">{{inventory.water.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.water.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('water')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.water}}
+              </section>
             </section>
-            <section class="trade-max-container">
-              <button ng-click="buyMax('water')"  type="button" name="button">Max</button>
-              <button ng-click="buyMax('furs')"  type="button" name="button">Max</button>
-              <button ng-click="buyMax('food')"  type="button" name="button">Max</button>
-              <button  ng-click="buyMax('ore')" type="button" name="button">Max</button>
-              <button ng-click="buyMax('games')"  type="button" name="button">Max</button>
-              <button ng-click="buyMax('firearms')"  type="button" name="button">Max</button>
-              <button ng-click="buyMax('medicine')"  type="button" name="button">Max</button>
-              <button  ng-click="buyMax('machines')" type="button" name="button">Max</button>
-              <button  ng-click="buyMax('narcotics')" type="button" name="button">Max</button>
-              <button  ng-click="buyMax('robots')" type="button" name="button">Max</button>
+
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('furs')" type="button" name="button">{{inventory.furs.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.furs.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('furs')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.furs}}
+              </section>
             </section>
-            <section class="tade-price-container">
-              {{commander.currentSystem.buyPrice.water}}
-              {{commander.currentSystem.buyPrice.furs}}
-              {{commander.currentSystem.buyPrice.food}}
-              {{commander.currentSystem.buyPrice.ore}}
-              {{commander.currentSystem.buyPrice.games}}
-              {{commander.currentSystem.buyPrice.firearms}}
-              {{commander.currentSystem.buyPrice.medicine}}
-              {{commander.currentSystem.buyPrice.machines}}
-              {{commander.currentSystem.buyPrice.narcotics}}
-              {{commander.currentSystem.buyPrice.robots}}
+
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('food')" type="button" name="button">{{inventory.food.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.food.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('food')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.food}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('ore')" type="button" name="button">{{inventory.ore.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.ore.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('ore')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.ore}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('games')" type="button" name="button">{{inventory.games.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.games.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('games')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.games}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('firearms')" type="button" name="button">{{inventory.firearms.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.firearms.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('firearms')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.firearms}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('medicine')" type="button" name="button">{{inventory.medicine.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.medicine.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('medicine')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.medicine}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('machines')" type="button" name="button">{{inventory.machines.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.machines.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('machines')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.machines}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('narcotics')" type="button" name="button">{{inventory.narcotics.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.narcotics.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('narcotics')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.narcotics}}
+              </section>
+            </section>
+            <section class="item-container">
+              <section class="inventory column">
+                <button ng-click="buySome('robots')" type="button" name="button">{{inventory.robots.supply}}</button>
+
+              </section>
+              <section class="item-name-container column">
+                {{inventory.robots.name}}
+              </section>
+              <section class="max-container column">
+                <button ng-click="buyMax('robots')"  type="button" name="button">Max</button>
+              </section>
+              <section class="item-price-container column">
+                {{commander.currentSystem.buyPrice.robots}}
+              </section>
             </section>
 
           </section>

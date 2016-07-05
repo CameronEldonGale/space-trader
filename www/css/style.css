@@ -1,4 +1,11 @@
 /* Empty. Add your own CSS if you like */
+#newCommander{
+  position: absolute;
+    top: 113px;
+    right: 47px;
+    height: 15vh;
+    width: 32%;
+}
 #toTheRight {
   position: absolute;
   right: 15px;
@@ -28,34 +35,41 @@
   top: 15px;
 }
 
+.price-container{
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 20vh;
+  display: flex;
+  justify-content: space-around;
+
+}
+
 .left-price{
-  position: absolute;
-  left: 60px;
+  /*position: absolute;
+  left: 60px;*/
 
 }
 
 .right-price{
-  position: absolute;
-  right: 80px;
+  /*position: absolute;
+  right: 80px;*/
 }
 
 .trade-container{
   display: flex;
-  align-items: flex-start;
-}
-.inv-buttons-container{
   flex-direction: column;
-
 }
-.trade-names-contianer{
-  flex-direction: column;
-
+.item-container{
+  display: flex;
+  justify-content: space-around;
+  padding: 6px;
 }
-.trade-price-container{
-  flex-direction: column;
-
+.column{
+  width: 25%;
 }
-
+.trade-header{
+  border-bottom: 1px solid black;
+}
 
 button {
   background: #f4f4f4;

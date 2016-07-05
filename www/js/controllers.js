@@ -474,13 +474,16 @@ $scope.retire = function(){
 
       $scope.submit = function(user){
         console.log(user);
-        var socket = io.connect('http://localhost');
+        var socket = io.connect("http://localhost:9001");
           socket.on('connect', function(){
-              socket.emit('authentication', {username: "John", password: "secret"});
+            console.log("connected");
+              socket.emit('authentication', user);
               socket.on('authenticated', function() {
               // use the socket as usual
+              console.log("authenticated");
                $state.go("mainMenu")
               });
+              console.log("not authenticated?");
             });
 
       }

@@ -5,7 +5,7 @@ angular.module('app.services', [])
 }])
 
 .service('playerService', function($http){
-  // var host = "http://localhost:9001";
+  var host = "http://localhost:9001";
   // var host = "http://localhost:80";
 
   this.saveGame = function (obj){
@@ -17,13 +17,13 @@ angular.module('app.services', [])
     }
     return $http({
       method: "PUT",
-      url: "/api/player/" + obj._id,
+      url:host+ "/api/player/" + obj._id,
       data: obj
     })
   }
   return $http({
     method: 'POST',
-    url: '/api/player',
+    url:host+ '/api/player',
     data: obj
   })
 }
@@ -31,14 +31,14 @@ this.loadGame= function(){
 
   return $http({
     method: 'GET',
-    url:'/api/player'
+    url:host+'/api/player'
   })
 
 }
 this.retire= function(player){
   return $http({
     method: 'POST',
-    url:'/api/highscores',
+    url:host+'/api/highscores',
     data: player
   })
 }
@@ -46,7 +46,7 @@ this.retire= function(player){
 this.createUser = function(user){
   return $http({
     method: 'POST',
-    url: '/api/user',
+    url:host+ '/api/user',
     data: user
   })
 }
@@ -507,7 +507,7 @@ this.createUser = function(user){
       new Planet("Caprica"),
       new Planet("Romulus"),
       new Planet("Kronos"),
-      new Planet("Utopia"),
+      new Planet("Utopia")
     ]
 
     function updatePlanets (){
