@@ -11,11 +11,11 @@ var io = require('socket.io')(server);
 var socketioJwt = require('socketio-jwt');
 var jwtSecret = require('./secret')
 // var sio = io.listen(server)
-var options = {
-  origin: 'http://localhost:8100'
-}
+// var options = {
+//   origin: 'http://localhost:8100'
+// }
 
-app.use(cors(options));
+app.use(cors());
 app.use(bodyParser())
 
 io.use(socketioJwt.authorize({
