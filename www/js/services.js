@@ -3,6 +3,62 @@ angular.module('app.services', [])
 .factory('BlankFactory', [function(){
 
 }])
+.service("shipService",function(){
+  var shipList =[
+    {
+      name: "Flea",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Gnat",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Firefly",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Mosquito",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Bumblebee",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Beetle",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Hornet",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Grasshopper",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Termite",
+      hullStrength: 25,
+      hullHealth: 25,
+    },
+    {
+      name: "Wasp",
+      hullStrength: 25,
+      hullHealth: 25,
+    }
+  ]
+
+})
+
 .service("encounterService", function(){
 
   function getRandomIntInclusive(min, max) {
@@ -748,6 +804,7 @@ this.loginUser = function(user){
   var commander = {name: "commander", pilot: 8, fighter: 2, trader: 6, engineer: 2, _id: "need a new game"}
   commander.credits = 1000
   commander.difficulty = 0
+  commander.encounters = false;
   commander.inventory = {
     water: {
       amount: 0,
@@ -805,6 +862,11 @@ this.loginUser = function(user){
     name: "Gnat",
     range: 14,
     fuel: 14,
+    hullStrength: 100,
+    hullHealth: 100,
+    sheild: 0,
+    sheildSlots: 0,
+    maxSheildSlots: 0,
     cargobays: {
       total: 15,
       filled: 0

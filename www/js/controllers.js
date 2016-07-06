@@ -350,15 +350,17 @@ $scope.retire = function(){
     var warpTarget = planets.getTarget(index)
     current = warpTarget
     planets.warp(warpTarget)
+    commander.encounters = true;
+    $state.go("tabsController.system")
 
-    $state.go("encounter")
   }
 
   $scope.warp = warp2
 
 })
 
-.controller('systemCtrl', function($scope, $stateParams,$ionicPopup, planets, commanderService, questService) {
+.controller('systemCtrl', function($scope, $stateParams,$ionicPopup, planets, commanderService, questService, $state,encounterService,$ionicModal ) {
+
       var commander = commanderService.getCommander();
       $scope.specialShow = commander.currentSystem.special;
       $scope.mercShow = false;
@@ -435,6 +437,90 @@ $scope.retire = function(){
     }
 
 
+        function string2num (string){
+          if (string === "Swarms") {
+            return 4
+          }
+          if (string === "Many") {
+            return 3
+          }
+          if (string === "Some") {
+            return 2
+          }
+          if (string === "Few") {
+            return 1
+          }
+          if (string === "None") {
+            return 0
+          }
+        }
+
+
+
+        if (commander.encounters) {
+
+        $scope.commander = commander
+        $scope.npc ={
+          action: "It ignores you"
+        }
+        var pirates = string2num(commander.currentSystem.pirates)
+        var police = string2num(commander.currentSystem.police)
+        var traders = commander.currentSystem.traders
+        var encounters = encounterService.getEncounters(pirates, police, traders)
+        var totalEncounters = encounters.length
+        console.log(encounters);
+        var index = 0;
+        $scope.encounter = encounters[0]
+
+      //HERE
+      $scope.modal = $ionicModal.fromTemplateUrl("encounter-modal.html", {
+          scope: $scope,
+          animation: 'slide-in-up'
+        }).then(function(modal) {
+          $scope.modal = modal;
+          if (totalEncounters > 0) {
+            $scope.modal.show()
+
+          $scope.cheat = function(){
+            $ionicPopup.alert({
+               title: 'Cheat',
+               template: 'destroy the other ship?'
+             }).then(function(res) {
+           console.log('what violence');
+           $scope.modal.hide()
+
+         });
+          }
+        }
+        });
+
+        // if (totalEncounters > 0) {
+        //   $scope.modal.show()
+        // }
+
+
+        $scope.openModal = function() {
+          $scope.modal.show();
+        };
+        $scope.closeModal = function() {
+          $scope.modal.hide();
+        };
+        // Cleanup the modal when we're done with it!
+        $scope.$on('$destroy', function() {
+          $scope.modal.remove();
+        });
+        // Execute action on hide modal
+        $scope.$on('modal.hidden', function() {
+          // Execute action
+        });
+        // Execute action on remove modal
+        $scope.$on('modal.removed', function() {
+          // Execute action
+        });
+
+
+        commander.encounters = false;
+}
 
 
 
@@ -442,59 +528,6 @@ $scope.retire = function(){
 
 .controller('encounterCtrl', function($scope,$state,commanderService,encounterService, $ionicPopup, $ionicModal) {
 
-  function string2num (string){
-    if (string === "Swarms") {
-      return 4
-    }
-    if (string === "Many") {
-      return 3
-    }
-    if (string === "Some") {
-      return 2
-    }
-    if (string === "Few") {
-      return 1
-    }
-    if (string === "None") {
-      return 0
-    }
-  }
-
-  var pirates = string2num(commander.currentSystem.pirates)
-  var police = string2num(commander.currentSystem.police)
-  var traders = commander.currentSystem.traders
-  var encounters = encounterService.getEncounters(pirates, police, traders)
-  console.log(encounters);
-  $scope.encounter = encounters[0]
-
-//HERE
-$ionicModal.fromTemplateUrl("encounter-modal.html", {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-    $scope.modal.show()
-  });
-
-
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  });
 
 
 
@@ -518,7 +551,7 @@ $ionicModal.fromTemplateUrl("encounter-modal.html", {
   $scope.land = function(){
     $state.go("tabsController.system")
   }
-
+$state.go("tabsController.system")
 })
 
 .controller('mainMenuCtrl', function($scope, $state, $ionicModal, $ionicPopup ,commanderService, planets, playerService) {

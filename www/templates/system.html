@@ -20,3 +20,44 @@
 
     </ion-content>
 </ion-view>
+
+
+<script id="encounter-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Encounter</h1>
+    </ion-header-bar>
+    <ion-content class="encounter-container">
+
+    <section class="encounter-img-container">
+      <section>
+        <img ng-src="img/{{commander.ship.name}}.png" alt="" />
+        <p>
+          <b>{{commander.ship.name}}</b><br>
+          hull : {{commander.ship.hull}}
+          sheilds: {{commander.ship.sheild}}
+        </p>
+      </section>
+
+      <section class="ecounter-npc-container">
+        <img ng-src="img/{{encounter.ship}}-left.png" alt="" />
+        <p>
+          <b>{{commander.ship.name}}</b><br>
+          hull : {{encounter.ship.hull}}
+          sheilds: {{encounter.ship.sheild}}
+        </p>
+      </section>
+
+    </section>
+        <section class="encounter-text-container">
+          <p>
+            You encounter a {{encounter.class}} {{encounter.ship}} {{encounter.clicks}} clicks away from {{currentSystem.name}}
+          </p>
+          <p>
+            {{npc.action}}
+          </p>
+        </section>
+    <button ng-click="cheat()" style="width: 90%; margin: 8px;"class="button button-positive">cheat!</button>
+    </ion-content>
+  </ion-modal-view>
+</script>

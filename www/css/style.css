@@ -2,8 +2,15 @@
 /*#green {
   background: #4caf50;
 }*/
-.button-custom{
-  background: red;
+.encounter-container{
+  display: flex;
+
+  align-items: flex-start;
+}
+.encounter-img-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .backButton-container{
   display: flex;
