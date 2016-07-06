@@ -4,14 +4,14 @@
           <strong>Name</strong>     {{currentSystem.name}}   <br>
           <strong>Size</strong>    {{currentSystem.size}}      <br>
           <strong>Tech Level</strong>   {{currentSystem.tech}}   <br>
-          <strong>Government</strong> {{currentSystem.goverment}}     <br>
+          <strong>Government</strong> {{currentSystem.government}}     <br>
           <strong>Resources</strong>  {{resource}}    <br>
           <strong>Police</strong>  {{currentSystem.police}}    <br>
           <strong>Pirates</strong>  {{currentSystem.pirates}}    <br>
             <br>
-          <button type="button" name="button">News</button>
-          <button ng-hide= "specialValue" type="button" name="button">Special</button>
-          <button type="button" name="button">Mercenary for hire</button>
+          <button ng-click="news()" type="button" name="button">News</button>
+          <button ng-show="specialShow" ng-click="seeQuest()" type="button" name="button">Special</button>
+          <button ng-show="mercShow"type="button" name="button">Mercenary for hire</button>
 
         </p>
         <p>

@@ -3,6 +3,117 @@ angular.module('app.services', [])
 .factory('BlankFactory', [function(){
 
 }])
+.service("encounterService", function(){
+
+  function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function rollD1000(){
+    return getRandomIntInclusive(1,1000)
+  }
+
+
+  var ships =[
+    "Flea",
+    "Gnat",
+    "Firefly",
+    "Mosquito",
+    "Bumblebee",
+    "Beetle",
+    "Hornet",
+    "Grasshopper",
+    "Termite",
+    "Wasp"
+  ]
+
+  function isThereAnEncounter(popOfGroup){
+    var check = rollD1000();
+    // var check = 14;
+    if (popOfGroup === 0) {
+      return false;
+    }
+    if (popOfGroup === 1 && check <= 14) {
+      return true;
+    }
+    if (popOfGroup === 2 && check <= 34) {
+      return true
+    }
+    if (popOfGroup === 3 && check <= 67) {
+      return true
+    }
+    if (popOfGroup ===4 && check <= 108) {
+      return true
+    }
+    return false;
+  }
+
+  function getShip(num, job){
+    var random = getRandomIntInclusive(1, 9);
+    return {
+      class: job,
+      clicks: 20 - num,
+      ship: ships[random],
+    }
+  }
+
+   function getNumberofEncounters(popOfGroup){
+    var result =[];
+    for (var i = 1; i <= 20; i++) {
+      var index = i;
+      var isEncounter = isThereAnEncounter(popOfGroup)
+      if (isEncounter) {
+        result.push(index)
+      }
+
+    }
+    return result
+  }
+
+  function num2obj (array, job){
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+      result.push(getShip(array[i], job))
+    }
+    // console.log(result);
+    return result
+  }
+  function orderTheArray(array){
+    var result =[]
+    for (var i = 20; i >= 1; i--) {
+      for (var j = 0; j < array.length; j++) {
+        if (array[j].clicks === i) {
+          result.push(array[j])
+        }
+      }
+    }
+    return result;
+  }
+
+this.getEncounters = function (pirates, police, traders){
+  var pirateArray = getNumberofEncounters(pirates);
+  var policeArray = getNumberofEncounters(police);
+  var traderArray = getNumberofEncounters(traders);
+
+  pirateArray = num2obj(pirateArray, "pirate")
+  policeArray = num2obj(policeArray, "police")
+  traderArray = num2obj(traderArray, "trader")
+
+  var unordered = pirateArray.concat(policeArray).concat(traderArray)
+  var result = orderTheArray (unordered)
+  return result;
+}
+
+
+})
+.service('questService', function(){
+  this.getQuest = function(string){
+    if (string === 'moon') {
+      return "A planetiod real estate agent has a Utopian moon for sale. For just 500000 credits you can retire in luxury on your very own moon! <br> do you accept?"
+    }
+  }
+
+})
 
 .service('playerService', function($http){
   var host = "http://localhost:9001";
@@ -181,7 +292,7 @@ this.loginUser = function(user){
 
 
 
-.service('planets', function(commanderService){
+.service('planets', function(commanderService, questService){
 
     function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -235,128 +346,128 @@ this.loginUser = function(user){
 
     var govern = getRandomIntInclusive(0,16)
 
-    obj.goverment = governments[govern];
+    obj.government = governments[govern];
     obj.x = getRandomIntInclusive(0,10)
     obj.y = getRandomIntInclusive(0,10)
     obj.size = getSize()
 
-    if (obj.goverment === governments[0]) {
+    if (obj.government === governments[0]) {
       obj.pirates = "Swarms"
       obj.traders = getRandomIntInclusive(0,4)
-      obj.police = "none"
+      obj.police = "None"
       obj.tech = getTech(0,5)
 
     }
-    if (obj.goverment === governments[1]) {
-      obj.pirates = "few"
+    if (obj.government === governments[1]) {
+      obj.pirates = "Few"
       obj.traders = 4
-      obj.police = "few"
+      obj.police = "Few"
       obj.tech = getTech(5,7)
 
     }
-    if (obj.goverment === governments[2]) {
+    if (obj.government === governments[2]) {
       obj.pirates = "Swarms"
       obj.traders = getRandomIntInclusive(0,4)
-      obj.police = "many"
+      obj.police = "Many"
       obj.tech = getTech(0,5)
 
     }
-    if (obj.goverment === governments[3]) {
-      obj.pirates = "many"
+    if (obj.government === governments[3]) {
+      obj.pirates = "Many"
       obj.traders = 4
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(1,6)
 
     }
-    if (obj.goverment === governments[4]) {
-      obj.pirates = "few"
+    if (obj.government === governments[4]) {
+      obj.pirates = "Few"
       obj.traders = 4
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(5,7)
 
     }
-    if (obj.goverment === governments[5]) {
+    if (obj.government === governments[5]) {
       obj.pirates = "Swarms"
       obj.traders = 3
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(7,7)
 
 
     }
-    if (obj.goverment === governments[6]) {
-      obj.pirates = "some"
+    if (obj.government === governments[6]) {
+      obj.pirates = "Some"
       obj.traders = 3
-      obj.police = "some"
+      obj.police = "Some"
       obj.tech = getTech(0,7)
 
     }
-    if (obj.goverment === governments[7]) {
+    if (obj.government === governments[7]) {
       obj.pirates = "Swarms"
       obj.traders = 3
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(0,7)
 
     }
-    if (obj.goverment === governments[8]) {
-      obj.pirates = "some"
+    if (obj.government === governments[8]) {
+      obj.pirates = "Some"
       obj.traders = 1
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(4,7)
 
     }
-    if (obj.goverment === governments[9]) {
+    if (obj.government === governments[9]) {
       obj.pirates = "Swarms";
       obj.traders = 1;
-      obj.police = "few";
+      obj.police = "Few";
       obj.tech = getTech(0,3);
 
     }
-    if (obj.goverment === governments[10]) {
-      obj.pirates = "none"
+    if (obj.government === governments[10]) {
+      obj.pirates = "None"
       obj.traders = getRandomIntInclusive(3,4)
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(3,7)
 
     }
-    if (obj.goverment === governments[11]) {
-      obj.pirates = "some"
+    if (obj.government === governments[11]) {
+      obj.pirates = "Some"
       obj.traders = 3
-      obj.police = "many"
+      obj.police = "Many"
       obj.tech = getTech(3,7)
 
     }
-    if (obj.goverment === governments[12]) {
-      obj.pirates = "none"
+    if (obj.government === governments[12]) {
+      obj.pirates = "None"
       obj.traders = 4
-      obj.police = "few"
+      obj.police = "Few"
       obj.tech = getTech(0,3)
 
     }
-    if (obj.goverment === governments[13]) {
+    if (obj.government === governments[13]) {
       obj.pirates = "Swarms"
       obj.traders = getRandomIntInclusive(0,4)
-      obj.police = "few"
+      obj.police = "Few"
       obj.tech = getTech(0,5)
 
     }
-    if (obj.goverment === governments[14]) {
-      obj.pirates = "none"
+    if (obj.government === governments[14]) {
+      obj.pirates = "None"
       obj.traders = 1
-      obj.police = "few"
+      obj.police = "Few"
       obj.tech = getTech(1,1)
 
     }
-    if (obj.goverment === governments[15]) {
-      obj.pirates = "few"
+    if (obj.government === governments[15]) {
+      obj.pirates = "Few"
       obj.traders = 3
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(5,7)
 
     }
-    if (obj.goverment === governments[16]) {
-      obj.pirates = "few"
+    if (obj.government === governments[16]) {
+      obj.pirates = "Few"
       obj.traders = 2
-      obj.police = "swarms"
+      obj.police = "Swarms"
       obj.tech = getTech(0,4)
 
     }
@@ -380,16 +491,19 @@ this.loginUser = function(user){
 
     var Planet = function(name) {
       this.name= name;
-      this.special = false
+      this.special = false;
+      // console.log("planets...");
       if (name === "Utopia") {
-        this.special = "moon"
+        // console.log("hey");
+        this.special = "moon";
       }
+
       this.resource = "Nothing special"
       this.visited = false;
       this.days = 0;
       var attribute = getAttributes();
       this.size= attribute.size
-      this.goverment= attribute.goverment
+      this.government= attribute.government
       this.tech= attribute.tech
       this.police= attribute.police
       this.pirates= attribute.pirates
@@ -539,11 +653,11 @@ this.loginUser = function(user){
             if (planets[i].inventory.hasOwnProperty(item)) {
               if (planets[i].inventory[item].supply < planets[i].inventory[item].defaultSupply) {
                 planets[i].inventory[item].supply +=  Math.floor(planets[i].inventory[item].defaultSupply * (getRandomIntInclusive(5,20)/100) )
-                console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
+                // console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
               }
               if (planets[i].inventory[item].supply > planets[i].inventory[item].defaultSupply) {
                 planets[i].inventory[item].supply -=  Math.floor(planets[i].inventory[item].defaultSupply * (getRandomIntInclusive(5,20)/100) )
-                console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
+                // console.log( planets[i].name+ " " +planets[i].inventory[item].name +" "+planets[i].inventory[item].supply);
               }
             }
           }
@@ -633,7 +747,7 @@ this.loginUser = function(user){
 .service('commanderService', function(tradeService){
   var commander = {name: "commander", pilot: 8, fighter: 2, trader: 6, engineer: 2, _id: "need a new game"}
   commander.credits = 1000
-
+  commander.difficulty = 0
   commander.inventory = {
     water: {
       amount: 0,

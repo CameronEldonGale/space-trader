@@ -15,8 +15,9 @@ $scope.retire = function(){
 
   var commander = commanderService.getCommander()
   $scope.commander = commander
-  $scope.fuelCost = commander.ship.range - commander.ship.fuel
   var maxFuel = commander.ship.range - commander.ship.fuel
+  $scope.fuelCost = commander.ship.range - commander.ship.fuel
+
   $scope.buyFuel = function(){
 
     $scope.data = {}
@@ -59,17 +60,18 @@ $scope.retire = function(){
           }
 
           if (res) {
-
+            // console.log(res);
             var boughtFuel = commanderService.buyFuel(res)
+            $scope.fuelCost = commander.ship.range - commander.ship.fuel
+            maxFuel = commander.ship.range - commander.ship.fuel
             if (boughtFuel !== 'ok') {
               $ionicPopup.alert({
-                  title: boughtFuel,
-
+                  title: boughtFuel
                   });
-              $scope.fuelCost = commander.ship.range - commander.ship.fuel
+
             }
           }
-          return
+          return $scope.fuelCost = commander.ship.range - commander.ship.fuel
 
         });
 
@@ -302,7 +304,7 @@ $scope.retire = function(){
   var target = planets.getTarget(index)
   var current = planets.getCurrent()
   var commander =  commanderService.getCommander();
-
+ $scope.commander = commander;
   $scope.price =tradeService.getPriceDiff(current, target)
 
 
@@ -339,7 +341,7 @@ $scope.retire = function(){
   }
 
 
-  function warp2(){;
+  function warp2(){
     var distance = planets.getDistance(current, target)
 
     commanderService.loseFuel(distance)
@@ -349,16 +351,25 @@ $scope.retire = function(){
     current = warpTarget
     planets.warp(warpTarget)
 
-    $state.go("tabsController.system", warpTarget, {reload:true})
+    $state.go("encounter")
   }
 
   $scope.warp = warp2
 
 })
 
-.controller('systemCtrl', function($scope, $stateParams, planets) {
-      $scope.specialValue = false;
+.controller('systemCtrl', function($scope, $stateParams,$ionicPopup, planets, commanderService, questService) {
+      var commander = commanderService.getCommander();
+      $scope.specialShow = commander.currentSystem.special;
+      $scope.mercShow = false;
+      $scope.news = function(){
+        $ionicPopup.alert({
+            title:'News',
+            template: "Developers need more time to work!"
+            });
 
+      }
+      // console.log(commander.currentSystem.special);
 
     $scope.currentSystem = planets.getCurrent()
     var universe = planets.getPlanets()
@@ -375,9 +386,138 @@ $scope.retire = function(){
     }
 
     $scope.resource = showResource($scope.currentSystem)
+
+    $scope.seeQuest = function(){
+      var template = questService.getQuest(commander.currentSystem.special)
+      $scope.data = {}
+        var myPopup = $ionicPopup.show({
+            title: 'Special Event',
+            template: template,
+            scope: $scope,
+            buttons: [
+                        { text: 'Back' },
+                        {
+                          text: 'Accept',
+                          type: 'button-positive',
+                          onTap: function(e) {
+                            return "ok"
+                          }
+
+
+                        }
+                      ]
+          })
+
+          myPopup.then(function(res) {
+
+              if (res === 'ok') {
+                if (commander.credits > 500000) {
+                  commander.credits -= 500000
+                  $ionicPopup.alert({
+                      title:'You Won!',
+
+                      });
+                  return
+                }
+                if (commander.credits < 500000) {
+                  $ionicPopup.alert({
+                      title:'You can\'t afford it!',
+
+                      });
+                      return
+                }
+
+                console.log("accepted");
+              }
+
+            })
+
+    }
+
+
+
+
+
 })
 
-.controller('encounterCtrl', function($scope) {
+.controller('encounterCtrl', function($scope,$state,commanderService,encounterService, $ionicPopup, $ionicModal) {
+
+  function string2num (string){
+    if (string === "Swarms") {
+      return 4
+    }
+    if (string === "Many") {
+      return 3
+    }
+    if (string === "Some") {
+      return 2
+    }
+    if (string === "Few") {
+      return 1
+    }
+    if (string === "None") {
+      return 0
+    }
+  }
+
+  var pirates = string2num(commander.currentSystem.pirates)
+  var police = string2num(commander.currentSystem.police)
+  var traders = commander.currentSystem.traders
+  var encounters = encounterService.getEncounters(pirates, police, traders)
+  console.log(encounters);
+  $scope.encounter = encounters[0]
+
+//HERE
+$ionicModal.fromTemplateUrl("encounter-modal.html", {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+    $scope.modal.show()
+  });
+
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  $scope.land = function(){
+    $state.go("tabsController.system")
+  }
 
 })
 
@@ -504,7 +644,7 @@ $scope.retire = function(){
       $scope.submit = function(user){
 
         playerService.loginUser(user).then(function(res){
-          console.log(res.data);
+
           var token = res.data.token
           localStorage.setItem("id", res.data.id)
           localStorage.setItem("token", token);

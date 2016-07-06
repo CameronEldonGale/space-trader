@@ -8,10 +8,10 @@
             <strong>Distance</strong>  {{distance}}    <br>
             <strong>Police</strong>  {{targetSystem.police}}    <br>
             <strong>Pirates</strong>  {{targetSystem.pirates}}    <br>
-            <strong>Current Costs</strong> 0 cr
+            <strong>Current Costs</strong> {{commander.difficulty}} cr
         </p>
         <button id="left"ng-click="back()" type="button" name="button"><</button> <button id="right"ng-click="forward()"type="button" name="button">></button>
-
+         <h5>projected prices differences on {{targetSystem.name}}</h5>
         <section class="price-container">
           <section class="left-price">
             water: {{price.water}} <br>
