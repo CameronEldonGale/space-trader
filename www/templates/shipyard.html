@@ -8,5 +8,15 @@
           a full tank cost {{fuelCost}} credits
         </p>
         <button ng-click="buyFuel()" type="button" name="button">Buy Fuel</button>
+        <button ng-click="fuelMax()" type="button" name="button">Full Tank</button>
+        <p>
+          your hull strength is at {{commander.ship.hullHealth}}%
+        </p>
+        <p>
+          it will costs {{repairCost}} credits to repair
+        </p>
+        
+        <button ng-click="repairSome()" type="button" name="button">Repair</button>
+        <button ng-click="repairMax()" type="button" name="button">Repair All</button>
     </ion-content>
 </ion-view>

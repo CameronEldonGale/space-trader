@@ -18,6 +18,99 @@ $scope.retire = function(){
   var maxFuel = commander.ship.range - commander.ship.fuel
   $scope.fuelCost = commander.ship.range - commander.ship.fuel
 
+  $scope.repairCost = 0;
+  if (commander.ship.hullHealth < 100) {
+
+    var repairCost = 3 * (commander.ship.hullStrength-commander.ship.hull)
+    $scope.repairCost = repairCost
+  }
+
+  $scope.repairMax = function(){
+    if (commander.credits > $scope.repairCost) {
+      commander.credits -= $scope.repairCost
+      commander.ship.hull = commander.ship.hullStrength
+      commander.ship.hullHealth = 100;
+      $scope.repairCost = 0;
+    }else {
+      $ionicPopup.alert({
+          title: "Not enough Credits"
+          });
+        }
+    }
+
+  $scope.repairSome = function(){
+    var maxRepair = commander.ship.hullStrength-commander.ship.hull
+    if (repairCost > commander.credits) {
+      maxRepair = Math.floor(commander.credits/3)
+    }
+
+    $scope.data = {}
+    $scope.data.buyAmount = 0;
+    $scope.data.totalCost = 3 * $scope.data.buyAmount
+      var myPopup = $ionicPopup.show({
+          title: 'Repair Ship',
+          template:" How many hull points do you want to repair?"+"<br>"+"To fix {{data.buyAmount}} would cost "+" {{3*data.buyAmount}} " +'<input ng-model="data.buyAmount" placeholder="0" type="Number" min=0 max='+ maxRepair +'>',
+          scope: $scope,
+          buttons: [
+                      { text: 'Back' },
+                      {
+                        text: 'Ok',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                          if (!$scope.data.buyAmount) {
+                            //don't allow the user to close unless he enters wifi password
+                            // e.preventDefault();
+                            return "cancel"
+                          } else {
+                            return $scope.data.buyAmount;
+                          }
+                        }
+                      },
+                      {
+                        text: 'Max',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                          return "max"
+                        }
+                      },
+                    ]
+        })
+
+        myPopup.then(function(res) {
+          // console.log(res);
+          if (res==="cancel"||!res) {
+            return
+          }
+          if (res ==="max") {
+          res = maxRepair
+          }
+          commander.ship.hull += res;
+          commander.credits -= (res*3)
+          var repairCost = 3 * (commander.ship.hullStrength-commander.ship.hull)
+          $scope.repairCost = repairCost
+          commander.ship.hullHealth = Math.ceil(100 *commander.ship.hull/commander.ship.hullStrength)
+
+        })
+
+
+
+
+
+  }
+
+
+  $scope.fuelMax = function(){
+    var maxFuel = commander.ship.range - commander.ship.fuel
+    var boughtFuel = commanderService.buyFuel(maxFuel)
+    $scope.fuelCost = commander.ship.range - commander.ship.fuel
+
+    if (boughtFuel !== 'ok') {
+      $ionicPopup.alert({
+          title: boughtFuel
+          });
+        }
+    }
+
   $scope.buyFuel = function(){
 
     $scope.data = {}
@@ -345,7 +438,9 @@ $scope.retire = function(){
     var distance = planets.getDistance(current, target)
 
     commanderService.loseFuel(distance)
-
+    if (commander.ship.sheildSlots > 0) {
+      commander.ship.sheild = 100
+    }
 
     var warpTarget = planets.getTarget(index)
     current = warpTarget
@@ -535,6 +630,25 @@ $scope.retire = function(){
                 $scope.encounter = encounterShip
                 $scope.encounter.hull = 100 * Math.ceil(encounterShip.hullHealth/encounterShip.hullStrength)
                 $scope.npc = {}
+                if (commander.ship.hull < commander.ship.hullStrength) {
+                commander.ship.hull += commander.engineer;
+                    if (commander.ship.hull > commander.ship.hullStrength) {
+                      commander.ship.hull = commander.ship.hullStrength
+                    }
+                commander.ship.hullHealth = Math.ceil(100 *commander.ship.hull/commander.ship.hullStrength)
+
+                $scope.commander = commander
+                }
+
+
+                if (commander.ship.sheild) {
+                  commander.ship.sheild += 2*commander.engineer
+                  if (commander.ship.sheild > 100) {
+                    commander.ship.sheild = 100
+                  }
+                }
+
+
 
                 $scope.showAttack = false;
                 $scope.showIgnore = false;
@@ -584,6 +698,12 @@ $scope.retire = function(){
                 });
           }
           $scope.attack = function(){
+            $scope.showFlee = true;
+            $scope.showSurrender = true;
+            $scope.showBribe = false;
+            $scope.showIgnore = false;
+            $scope.showSubmit = false;
+            $scope.showTrade = false;
             $scope.npc.player = "You open fire on the " + encounterShip.class +" " +encounterShip.ship
             $scope.npc.action = "Your opponent attacks"
             // console.log("attack!");
@@ -679,7 +799,7 @@ $scope.retire = function(){
           }
 
           $scope.flee = function(){
-            console.log("flee");
+            // console.log("flee");
             var playerRun = diceRollService.d20(commander.pilot)
             var npcFollow = diceRollService.d20(encounterShip.pilot)
             if (playerRun > npcFollow + 5) {
@@ -767,12 +887,32 @@ $scope.retire = function(){
 
           $scope.surrender = function(){
             console.log("surrender");
-            plunder()
-            $ionicPopup.alert({
-               title: "The Pirates take all of your cargo and some credits",
-             }).then(function(res) {
-               next()
-             })
+            if (encounterShip.class === "pirate") {
+              plunder()
+              $ionicPopup.alert({
+                 title: "The Pirates take all of your cargo and some credits",
+               }).then(function(res) {
+                 next()
+               })
+            }
+            if (encounterShip.class === "trader") {
+              plunder()
+              $ionicPopup.alert({
+                 title: "Your opponent's crew take all of your cargo and some credits",
+               }).then(function(res) {
+                 next()
+               })
+            }
+            if (encounterShip.class === "police") {
+              $ionicPopup.alert({
+                 title:"You Lost",
+                 template: "You are arrested and thrown in prison. You are never released.",
+               }).then(function(res) {
+                 $state.go("spaceTrader")
+               })
+
+            }
+
           }
 
           $scope.trade = function(){
