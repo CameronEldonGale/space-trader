@@ -27,7 +27,7 @@ angular.module('app.routes', [])
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
 
-  
+
 })
 
   .state('tabsController.shipyard', {
@@ -103,8 +103,9 @@ angular.module('app.routes', [])
 
 
   .state('encounter', {
-    url: '/page8',
+    url: '/encounter',
     cache: false,
+    // abstract: true,
     templateUrl: 'templates/encounter.html',
     controller: 'encounterCtrl'
   })

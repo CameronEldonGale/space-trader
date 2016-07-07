@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var planetSchema = new Schema ({
-
+    special: Schema.Types.Mixed,
     x: Number,
     y: Number,
     visited: Boolean,

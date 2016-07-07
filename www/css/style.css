@@ -2,6 +2,35 @@
 /*#green {
   background: #4caf50;
 }*/
+.bottom{
+  bottom: 0;
+  right: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 86vh;
+}
+.bottom-right{
+  position: absolute;
+  top: 50px;
+  right: 5px;
+}
+.new-difficulty{
+  display: flex;
+}
+#difficulty-length{
+  width: 75px;
+}
+.encounter-container{
+  display: flex;
+
+  align-items: flex-start;
+}
+.encounter-img-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .backButton-container{
   display: flex;
   align-items: center;

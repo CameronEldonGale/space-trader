@@ -6,8 +6,9 @@ var Schema = mongoose.Schema;
 
 var playerSchema = new Schema({
   user: { type: Schema.ObjectId, ref: "User" },
-  special: Schema.Types.Mixed,
+
   name: String,
+  encounters: Boolean,
   pilot: Number,
   fighter: Number,
   trader: Number,
@@ -17,6 +18,12 @@ var playerSchema = new Schema({
     name: String,
     range: Number,
     fuel: Number,
+    hullStrength: Number,
+    hullHealth: Number,
+    hull: Number,
+    sheild: Number,
+    sheildSlots: Number,
+    maxSheildSlots: Number,
   cargobays: {
     filled: Number,
     total: Number
