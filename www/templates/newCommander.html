@@ -5,12 +5,20 @@
                 <span class="input-label">Name</span>
                 <input ng-model="commander.name" type="text" placeholder="">
             </label>
+          <section class="new-difficulty">
+            <b>Difficulty: </b>  <button type="button" name="button" ng-click="minusD()">-</button> <div id="difficulty-length">&nbsp{{difficulty}}</div> <button type="button" name="button" ng-click="plusD()">+</button>
+          </section>
         </form>
         <p id="newCommander-markdown1" style="color:#000000;" class=" ">Skill points remaining: {{points}}</p>
         <p id="newCommander-markdown2" style="color:#000000;" class=" ">Pilot:	&nbsp &nbsp &nbsp &nbsp<button type="button" name="button" ng-click="minus('pilot')">-</button>{{pilot}} <button type="button" name="button" ng-click="plus('pilot')">+</button></p>
         <p id="newCommander-markdown6" style="color:#000000;" class=" ">Fighter: 	&nbsp &nbsp <button type="button" name="button" ng-click="minus('fighter')">-</button>{{fighter}} <button type="button" name="button" ng-click="plus('fighter')">+</button></p>
         <p id="newCommander-markdown3" style="color:#000000;" class=" ">Trader: 	&nbsp &nbsp &nbsp<button type="button" name="button" ng-click="minus('trader')">-</button>{{trader}} <button type="button" name="button" ng-click="plus('trader')">+</button></p>
         <p id="newCommander-markdown5" style="color:#000000;" class=" ">Engineer: 	&nbsp<button type="button" name="button" ng-click="minus('engineer')">-</button>{{engineer}} <button type="button" name="button" ng-click="plus('engineer')">+</button></p>
-        <button  ng-disabled="filledForm" ng-click="newCommander()"  id="newCommander-button8" class=" button button-positive  button-block ">Ok</button>
+        <p> <b>Pilot</b> <br>The pilot skill determines how well you pilot your ship. A high piloting skill will enable you to flee from attacks easily, dodge attacks, and to stay on the tail of fleeing ships if you want to keep attacking them. This makes the piloting skill important to both traders and pirates. A navigating system will enhance your piloting capabilities.</p>
+        <p><b>Fighter</b> <br>The fighter skill determines how well you handle your weapons, in particular, how easy it is for you hit another ship. A trader who isn't interested in a pirating or bounty hunting career hasn't that much use of this skill, but for a pirate it is an absolute must. A targeting system will enhance your fighting capabilities.</p>
+        <p><b>Trader</b> <br>The trader skill determines what prices you must pay for trade goods, ships and equipment. A good trader can reduce prices up to 10%. This makes a high trader skill invaluable for traders, while pirates have less use for it. In the early stages of your life as a trader you might have a hard time getting any money if you work with low trading capabilities.</p>
+        <p><b>Engineer</b> <br>The engineer skill determines how well you keep your ship in shape. A good engineer may keep your hull and shields intact during a fight, will repair them quicker while travelling, and may even enhance your weaponry a bit so it does more damage. This makes the engineer skill important for both traders and pirates. An auto-repair system will enhance the engineering capabilities.</p>
+
+        <button  ng-disabled="filledForm" ng-click="newCommander()"  id="newCommander" class=" button button-positive  button-block ">Start</button>
     </ion-content>
 </ion-view>

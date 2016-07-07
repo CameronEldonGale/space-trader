@@ -6,14 +6,14 @@
           <strong>Name</strong>     {{currentSystem.name}}   <br>
           <strong>Size</strong>    {{currentSystem.size}}      <br>
           <strong>Tech Level</strong>   {{currentSystem.tech}}   <br>
-          <strong>Government</strong> {{currentSystem.goverment}}     <br>
+          <strong>Government</strong> {{currentSystem.government}}     <br>
           <strong>Resources</strong>  {{resource}}    <br>
           <strong>Police</strong>  {{currentSystem.police}}    <br>
           <strong>Pirates</strong>  {{currentSystem.pirates}}    <br>
             <br>
-          <button type="button" name="button">News</button>
-          <button type="button" name="button">Special</button>
-          <button type="button" name="button">Mercenary for hire</button>
+          <button ng-click="news()" type="button" name="button">News</button>
+          <button ng-show="specialShow" ng-click="seeQuest()" type="button" name="button">Special</button>
+          <button ng-show="mercShow"type="button" name="button">Mercenary for hire</button>
 
         </p>
         <p>
@@ -21,4 +21,60 @@
         </p>
 
     </ion-content>
+    <section class="bottom-right">
+      Credits: {{commander.credits}}
+    </section>
 </ion-view>
+
+
+<script id="encounter-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Encounter</h1>
+    </ion-header-bar>
+    <ion-content class="encounter-container">
+
+    <section class="encounter-img-container">
+      <section>
+        <img ng-src="img/{{commander.ship.name}}.png" alt="" />
+        <p>
+          <b>{{commander.ship.name}}</b><br>
+          hull : {{commander.ship.hullHealth}}% <br>
+          sheilds: {{commander.ship.sheild}}%
+        </p>
+      </section>
+
+      <section class="ecounter-npc-container">
+        <img ng-src="img/{{encounter.ship}}-left.png" alt="" />
+        <p>
+          <b>{{encounter.name}}</b><br>
+          hull : {{encounter.hullHealth}}% <br>
+          sheilds: {{encounter.sheild}}%
+        </p>
+      </section>
+
+    </section>
+        <section class="encounter-text-container">
+          <p>
+            You encounter a {{encounter.class}} {{encounter.ship}} {{encounter.clicks}} clicks away from {{currentSystem.name}}
+          </p>
+          <p>
+            {{npc.player}} <br>
+            {{npc.playerResult}}
+          </p>
+          <p>
+            {{npc.action}} <br>
+            {{npc.result}}
+          </p>
+        </section>
+    <!-- <button ng-click="cheat()" style="width: 90%; margin: 8px;"class="button button-positive">cheat!</button> -->
+    <button ng-click="attack()"ng-show="showAttack" type="button" name="button">Attack</button>
+    <button ng-click="ignore()"ng-show="showIgnore" type="button" name="button">Ignore</button>
+    <button ng-click="flee()"ng-show="showFlee" type="button" name="button">Flee</button>
+    <button ng-click="submit()"ng-show="showSubmit" type="button" name="button">Submit</button>
+    <button ng-click="bribe()"ng-show="showBribe" type="button" name="button">Bribe</button>
+    <button ng-click="trade()"ng-show="showTrade" type="button" name="button">Trade</button>
+    <button ng-click="surrender()"ng-show="showSurrender" type="button" name="button">Surrender</button>
+    </ion-content>
+  </ion-modal-view>
+</script>

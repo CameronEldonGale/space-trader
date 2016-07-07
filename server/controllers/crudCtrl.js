@@ -1,5 +1,6 @@
 var Player = require("../models/Player")
 var HighScore = require("../models/Highscore")
+var User = require("../models/User")
 
 module.exports = {
     create: function(req, res) {
@@ -13,11 +14,12 @@ module.exports = {
       },
 
       read: function(req, res) {
-          Player.find(req.query)
-          .exec(function(err, result) {
-            if (err) return res.status(500).send(err);
-            else res.send(result);
-          });
+        // console.log(req.params.id);
+          Player.find({user: req.params.id})
+            .exec(function(err, result) {
+                  if (err) return res.status(500).send(err);
+                  else res.send(result);
+                });
       },
 
   update: function(req, res) {
@@ -50,6 +52,23 @@ module.exports = {
             else res.send(result);
           });
       },
+      createUser: function(req, res) {
+          var newUser = new User(req.body);
+          newUser.save(function(err, result) {
+
+            if (err){   console.log(err)
+              return res.status(500).send(err);}
+            else{ res.send(result);}
+          });
+        },
+
+        readUser: function(req, res) {
+            User.find(req.query)
+            .exec(function(err, result) {
+              if (err) return res.status(500).send(err);
+              else res.send(result);
+            });
+        },
 
 
 }
