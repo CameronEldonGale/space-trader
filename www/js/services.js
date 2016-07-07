@@ -262,11 +262,11 @@ this.getEncounters = function (pirates, police, traders){
   })
 }
 this.loadGame= function(id){
-
+console.log(id);
   return $http({
     method: 'GET',
 
-    url: host +'/api/player'
+    url: host +'/api/player/'+id
 
   })
 
@@ -282,7 +282,7 @@ this.retire= function(player){
 this.createUser = function(user){
   return $http({
     method: 'POST',
-    url:'/api/user',
+    url:host +'/api/user',
     data: user
   })
 }
