@@ -234,13 +234,6 @@ this.getEncounters = function (pirates, police, traders){
 })
 
 .service('playerService', function($http){
-<<<<<<< HEAD
-  // var host = "http://localhost:9001";
-  // var host = "http://localhost:80";
-=======
-  var host = "http://localhost:9001";
-  // var host = "http://spacetrader.ninja";
->>>>>>> local
 
   this.saveGame = function (obj){
 

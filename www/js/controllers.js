@@ -1213,11 +1213,7 @@ $state.go("tabsController.system")
       }
 
       $scope.signUp = function(user){
-<<<<<<< HEAD
 
-=======
-        // console.log(user);
->>>>>>> local
 
         if (user === undefined||user.name === undefined||user.password === undefined||user.email === undefined) {
           $state.go("login",{},{reload:true})
@@ -1232,11 +1228,7 @@ $state.go("tabsController.system")
         playerService.createUser(user).then(function(res){
 
           localStorage.setItem("id", res.data._id)
-<<<<<<< HEAD
 
-=======
-          // console.log(localStorage.id);
->>>>>>> local
           $state.go("mainMenu",{},{reload:true})
         })
       }
