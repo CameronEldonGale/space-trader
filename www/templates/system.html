@@ -19,6 +19,9 @@
         </p>
 
     </ion-content>
+    <section class="bottom-right">
+      Credits: {{commander.credits}}
+    </section>
 </ion-view>
 
 
@@ -34,17 +37,17 @@
         <img ng-src="img/{{commander.ship.name}}.png" alt="" />
         <p>
           <b>{{commander.ship.name}}</b><br>
-          hull : {{commander.ship.hull}}
-          sheilds: {{commander.ship.sheild}}
+          hull : {{commander.ship.hullHealth}}% <br>
+          sheilds: {{commander.ship.sheild}}%
         </p>
       </section>
 
       <section class="ecounter-npc-container">
         <img ng-src="img/{{encounter.ship}}-left.png" alt="" />
         <p>
-          <b>{{commander.ship.name}}</b><br>
-          hull : {{encounter.ship.hull}}
-          sheilds: {{encounter.ship.sheild}}
+          <b>{{encounter.name}}</b><br>
+          hull : {{encounter.hullHealth}}% <br>
+          sheilds: {{encounter.sheild}}%
         </p>
       </section>
 
@@ -54,10 +57,22 @@
             You encounter a {{encounter.class}} {{encounter.ship}} {{encounter.clicks}} clicks away from {{currentSystem.name}}
           </p>
           <p>
-            {{npc.action}}
+            {{npc.player}} <br>
+            {{npc.playerResult}}
+          </p>
+          <p>
+            {{npc.action}} <br>
+            {{npc.result}}
           </p>
         </section>
     <button ng-click="cheat()" style="width: 90%; margin: 8px;"class="button button-positive">cheat!</button>
+    <button ng-click="attack()"ng-show="showAttack" type="button" name="button">Attack</button>
+    <button ng-click="ignore()"ng-show="showIgnore" type="button" name="button">Ignore</button>
+    <button ng-click="flee()"ng-show="showFlee" type="button" name="button">Flee</button>
+    <button ng-click="submit()"ng-show="showSubmit" type="button" name="button">Submit</button>
+    <button ng-click="bribe()"ng-show="showBribe" type="button" name="button">Bribe</button>
+    <button ng-click="trade()"ng-show="showTrade" type="button" name="button">Trade</button>
+    <button ng-click="surrender()"ng-show="showSurrender" type="button" name="button">Surrender</button>
     </ion-content>
   </ion-modal-view>
 </script>

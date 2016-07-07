@@ -5,6 +5,9 @@
                 <span class="input-label">Name</span>
                 <input ng-model="commander.name" type="text" placeholder="">
             </label>
+          <section class="new-difficulty">
+            <b>Difficulty: </b>  <button type="button" name="button" ng-click="minusD()">-</button> <div id="difficulty-length">&nbsp{{difficulty}}</div> <button type="button" name="button" ng-click="plusD()">+</button>
+          </section>
         </form>
         <p id="newCommander-markdown1" style="color:#000000;" class=" ">Skill points remaining: {{points}}</p>
         <p id="newCommander-markdown2" style="color:#000000;" class=" ">Pilot:	&nbsp &nbsp &nbsp &nbsp<button type="button" name="button" ng-click="minus('pilot')">-</button>{{pilot}} <button type="button" name="button" ng-click="plus('pilot')">+</button></p>

@@ -20,6 +20,7 @@ var playerSchema = new Schema({
     fuel: Number,
     hullStrength: Number,
     hullHealth: Number,
+    hull: Number,
     sheild: Number,
     sheildSlots: Number,
     maxSheildSlots: Number,

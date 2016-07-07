@@ -3,59 +3,121 @@ angular.module('app.services', [])
 .factory('BlankFactory', [function(){
 
 }])
+.service("diceRollService", function(){
+
+  function getRandomIntInclusive(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  this.d20 = function d20(num){
+    if (!num) {
+      num = 0;
+    }
+    return getRandomIntInclusive(1,20)+num
+  }
+
+  this.d6 = function d6(num){
+    if (!num) {
+      num = 0;
+    }
+    return getRandomIntInclusive(1,6)+num
+  }
+
+
+
+
+})
+
 .service("shipService",function(){
+
   var shipList =[
     {
-      name: "Flea",
+      ship: "Flea",
       hullStrength: 25,
-      hullHealth: 25,
+      hullHealth: 100,
+      hull: 25,
+      sheild: 0
     },
     {
-      name: "Gnat",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Gnat",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 0
     },
     {
-      name: "Firefly",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Firefly",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Mosquito",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Mosquito",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Bumblebee",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Bumblebee",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Beetle",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Beetle",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Hornet",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Hornet",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Grasshopper",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Grasshopper",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Termite",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Termite",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     },
     {
-      name: "Wasp",
-      hullStrength: 25,
-      hullHealth: 25,
+      ship: "Wasp",
+      hullStrength: 100,
+      hullHealth: 100,
+      hull: 100,
+      sheild: 100,
     }
   ]
+
+  var shipPilot ={
+    pilot: 6,
+    trader: 6,
+    fighter: 6,
+    engineer: 6,
+  }
+
+  this.getShip = function(encounterShip){
+    // console.log(encounterShip);
+    for (var i = 0; i < shipList.length; i++) {
+    if (encounterShip.ship === shipList[i].ship) {
+      return Object.assign(encounterShip, shipList[i], shipPilot)
+    }
+    }
+  }
 
 })
 
@@ -173,7 +235,7 @@ this.getEncounters = function (pirates, police, traders){
 
 .service('playerService', function($http){
   var host = "http://localhost:9001";
-  // var host = "http://localhost:80";
+  // var host = "http://spacetrader.ninja";
 
   this.saveGame = function (obj){
 
@@ -260,6 +322,20 @@ this.loginUser = function(user){
     narcotics: new Good("Narcotics",2625,3500,false),
     robots: new Good("Robots",2625,3500)
   };
+
+  var tradeGoodsList = [
+    new Good("Water",30,54),
+    new Good("Furs",250,320),
+    new Good("Food",105,135),
+    new Good("Ore",390,490),
+    new Good("Games",180,240),
+    new Good("Machines",690,810),
+    new Good("Firearms",725,1125,false),
+    new Good("Medicine",510,630),
+    new Good("Narcotics",2625,3500,false),
+    new Good("Robots",2625,3500)
+  ]
+  this.getTradeGoodsList = tradeGoodsList;
 
 
   this.getTradeGoods = tradeGoods;
@@ -864,6 +940,7 @@ this.loginUser = function(user){
     fuel: 14,
     hullStrength: 100,
     hullHealth: 100,
+    hull: 100,
     sheild: 0,
     sheildSlots: 0,
     maxSheildSlots: 0,
@@ -955,6 +1032,34 @@ this.loginUser = function(user){
     commander.inventory[item].purchasePrice = newTotalSpent/newtotalAmount
 
     return "purchased"
+  }
+
+  this.buyFromTrader = function(item, amount, price){
+
+    var item = item.toLowerCase()
+
+
+    var numberOfGoods = amount;
+    var emptyBays = commander.ship.cargobays.total - commander.ship.cargobays.filled
+
+
+    if (amount > emptyBays) {
+      return "You do not have enough space in your cargobays"
+    }
+
+    var cost = amount * price;
+    commander.credits = commander.credits - cost;
+    commander.ship.cargobays.filled = commander.ship.cargobays.filled + numberOfGoods;
+    commander.inventory[item].amount = commander.inventory[item].amount + numberOfGoods;
+    commander.inventory[item].totalSpent = commander.inventory[item].totalSpent + cost;
+
+    var newtotalAmount = commander.inventory[item].amount;
+    var newTotalSpent  = commander.inventory[item].totalSpent;
+    commander.inventory[item].purchasePrice = newTotalSpent/newtotalAmount
+
+    return "purchased"
+
+
   }
 
   this.sellSome = function(item, amount, price){
