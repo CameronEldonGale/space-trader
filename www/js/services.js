@@ -291,7 +291,7 @@ this.loginUser = function(user){
   // console.log(user);
   return $http({
     method: 'POST',
-    url:'/login',
+    url: host+'/login',
     data: user
   })
 }

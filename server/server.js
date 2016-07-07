@@ -15,7 +15,7 @@ var jwtSecret = require('./secret')
 //   origin: 'http://localhost:8100'
 // }
 
-app.use(cors());
+// app.use(cors(options));
 app.use(bodyParser())
 
 io.use(socketioJwt.authorize({
