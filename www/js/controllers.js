@@ -1069,6 +1069,8 @@ $state.go("tabsController.system")
 })
 
 .controller('mainMenuCtrl', function($scope, $state, $ionicModal, $ionicPopup ,commanderService, planets, playerService) {
+
+
     $scope.saveGame = function(){
       var commander = commanderService.getCommander()
       var universe = planets.getPlanets()
@@ -1091,7 +1093,24 @@ $state.go("tabsController.system")
         }
       })
     }
+    $scope.deletePlayer = function(player){
+      console.log(player);
+      $ionicPopup.confirm({
+        title: "Are you sure you want to delete "+player.name+" ?"
+      }).then(function(res){
+        // console.log(res);
+        if (res) {
+          playerService.deleteGame(player._id).then(function(res){
+            var id = localStorage.id
+            playerService.loadGame(id).then(function(res){
+            //
+            $scope.savedGames = res.data
 
+           })
+          })
+        }
+      })
+    }
 
     $scope.loadPlayer = function(player){
       //
@@ -1240,8 +1259,11 @@ $state.go("tabsController.system")
 .controller('spaceTraderCtrl', function($scope) {
 
 })
+.controller('helpCtrl', function($scope) {
 
-.controller('newCommanderCtrl', function($scope, $state, commanderService) {
+})
+
+.controller('newCommanderCtrl', function($scope, $state, commanderService, $ionicModal) {
   $scope.points = 16
   $scope.pilot = 1
   $scope.fighter = 1
@@ -1313,6 +1335,31 @@ $state.go("tabsController.system")
   $state.go("tabsController.system")
 
   }
+
+  $ionicModal.fromTemplateUrl('intro-modal.html', {
+  scope: $scope,
+  animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+    $scope.modal.show();
+  });
+
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+
 
 
 })

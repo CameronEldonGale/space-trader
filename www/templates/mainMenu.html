@@ -4,7 +4,7 @@
         <button ng-click="loadGame()" id="mainMenu-button4" class=" button button-positive  button-block ">Load Game</button>
         <button ng-click="saveGame()" id="mainMenu-button7" class=" button button-positive  button-block ">Save Game</button>
         <button id="mainMenu-button5" class=" button button-positive  button-block ">High Scores</button>
-        <button id="mainMenu-button6" class=" button button-positive  button-block ">Help</button>
+        <button id="mainMenu-button6" class=" button button-positive  button-block " ui-sref="help">Help</button>
         <button ng-click="logout()" class=" button button-positive  button-block " type="button" name="button">Logout</button>
         <img class="mainMenu-img" src="./img/Grasshopper-left.png" alt="grasshopper" />
     </ion-content>
@@ -20,7 +20,9 @@
     <button ng-click="closeModal()" style="width: 90%; margin: 8px;"class="button button-positive">back</button>
   </section>
       <ion-item collection-repeat="player in savedGames">
-        {{player.name}} <button ng-click="loadPlayer(player)" id="toTheRight"class="button button-positive">Load</button>
+        {{player.name}}
+        <button ng-click="deletePlayer(player)" id="nextToTheRight"class="button button-positive">Delete</button>
+        <button ng-click="loadPlayer(player)" id="toTheRight"class="button button-positive">Load</button>
       </ion-item>
     </ion-content>
   </ion-modal-view>
