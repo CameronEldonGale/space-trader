@@ -264,6 +264,13 @@ this.loadGame= function(id){
   })
 
 }
+this.deleteGame = function (id){
+  return $http({
+    method: 'DELETE',
+    url:host+'/api/player/'+id
+  })
+}
+
 this.retire= function(player){
   return $http({
     method: 'POST',

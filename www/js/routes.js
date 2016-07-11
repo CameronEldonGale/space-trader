@@ -29,6 +29,14 @@ angular.module('app.routes', [])
 
 
 })
+.state('help', {
+  url: '/help',
+  cache: false,
+  templateUrl: 'templates/help.html',
+  controller: 'helpCtrl'
+
+
+})
 
   .state('tabsController.shipyard', {
     url: '/shipyard',
