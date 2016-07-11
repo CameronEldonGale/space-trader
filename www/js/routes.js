@@ -32,7 +32,7 @@ angular.module('app.routes', [])
 .state('help', {
   url: '/help',
   cache: false,
-  templateUrl: 'templates/help.html',
+  templateUrl: 'templates/Help.html',
   controller: 'helpCtrl'
 
 
